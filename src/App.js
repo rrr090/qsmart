@@ -73,8 +73,7 @@ function App() {
                                 <li><NavLink to="/" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} onClick={toggleMobileMenu}>Главная</NavLink></li>
                                 <li><NavLink to="/opportunities" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} onClick={toggleMobileMenu}>Все возможности</NavLink></li>
                                 <li><NavLink to="/about" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} onClick={toggleMobileMenu}>О нас</NavLink></li>
-                                {/* Ссылку на админ-панель в мобильном меню также можно сделать условной, но для простоты она пока всегда видна */}
-                                <li><NavLink to="/admin" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} onClick={toggleMobileMenu}>Админ-панель</NavLink></li>
+                                
                             </ul>
                         </nav>
                     </header>
