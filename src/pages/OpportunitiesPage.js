@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { collection, query, orderBy, getDocs, where } from 'firebase/firestore';
 import { db } from '../utils/firebaseConfig'; 
-import './OpportunitiesPage.css'; 
+import './OpportunitiesPage.css';
+
 
 const TYPE_MAPPINGS = {
     'Олимпиада': ['Олимпиада', 'Olympiad'], 

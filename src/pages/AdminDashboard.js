@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import './AdminDashboard.css';
 
+
 function AdminDashboard() {
     const { logout, currentUser } = useAuth(); // Получаем currentUser
 
