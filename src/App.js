@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, NavLink } from 'react-router-dom';
 import HomePage from './pages/HomePage';
@@ -7,18 +6,15 @@ import AboutPage from './pages/AboutPage';
 import Login from './components/Login';
 import AdminDashboard from './pages/AdminDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
-import { AuthProvider, useAuth } from './contexts/AuthContext'; // Импортируем useAuth
-import './App.css'; // Ваш основной CSS-файл
+import { AuthProvider, useAuth } from './contexts/AuthContext'; 
+import './App.css'; 
 
-// Импортируем заглушки для новых админских страниц (пока что)
 import AdminOverviewPage from './pages/admin/AdminOverviewPage';
 import OpportunityListAdmin from './pages/admin/OpportunityListAdmin';
 import OpportunityForm from './components/OpportunityForm';
 
-// --- Компонент HeaderNav - вынесен отдельно для чистоты и доступа к useAuth ---
-// Это позволит нам использовать useAuth для условного отображения ссылки на админ-панель
 function HeaderNav({ toggleMobileMenu }) {
-    const { currentUser } = useAuth(); // Используем хук useAuth здесь
+    const { currentUser } = useAuth(); 
 
     // Функция для определения класса NavLink
     const getNavLinkClass = ({ isActive }) =>
@@ -79,7 +75,6 @@ function App() {
                                 <li><NavLink to="/about" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} onClick={toggleMobileMenu}>О нас</NavLink></li>
                                 {/* Ссылку на админ-панель в мобильном меню также можно сделать условной, но для простоты она пока всегда видна */}
                                 <li><NavLink to="/admin" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} onClick={toggleMobileMenu}>Админ-панель</NavLink></li>
-                                <li><NavLink to="/admin/login" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} onClick={toggleMobileMenu}>Войти</NavLink></li>
                             </ul>
                         </nav>
                     </header>

@@ -29,11 +29,17 @@
   pointer-events: none;
 }
 
-.header-content{
-   font-family: 'Poppins', sans-serif;
+/* Изменения в header-content для адаптивности */
+.header-content {
+  font-family: 'Poppins', sans-serif;
   font-size: 1.8rem;
   font-weight: 700;
+  width: 100%; /* Убедимся, что он занимает всю ширину для мобильных */
+  display: flex;
+  justify-content: space-between; /* Лого и кнопка по краям */
+  align-items: center;
 }
+
 .site-logo {
   font-family: 'Poppins', sans-serif;
   font-size: 1.8rem;
@@ -43,6 +49,7 @@
   text-transform: uppercase;
   transition: all 0.3s ease;
   cursor: pointer;
+  text-decoration: none; /* Убедимся, что нет подчеркивания для Link */
 }
 
 .site-logo:hover {
@@ -55,11 +62,12 @@
   background-color: #061638;
   min-height: 10vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* По умолчанию: элементы в колонку (для мобильных) */
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  padding: 15px 20px; /* Добавим padding, если его не было */
 }
 
 .App-link {
@@ -70,11 +78,14 @@ a {
   text-decoration: none;
   color: white;
 }
+
+/* Десктопная навигация: по умолчанию видна (как у вас) */
 .desktop-nav ul {
   list-style: none;
   display: flex;
-  gap: 2rem; /* Расстояние между пунктами */
+  gap: 2rem;
 }
+
 .desktop-nav li {
   padding: 10px;
   border-radius: 30px;
@@ -85,68 +96,108 @@ a {
 .desktop-nav li:hover,
 .desktop-nav li.active {
   background-color: #0056b3;
+  color:#061638;
   transform: translateY(-3px);
   box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
 }
 
-
-/* Стили для АКТИВНОЙ ссылки (важно!) */
+/* Стили для АКТИВНОЙ ссылки NavLink.active (важно!) */
 .nav-link.active {
-  color: #3d026d; 
+  color: rgb(56, 6, 97); /* Изменил на white, чтобы соответствовал активному фону */
   font-weight: bold;
 }
 
 
+/* --- МОБИЛЬНЫЕ СТИЛИ: ИСПРАВЛЕНИЯ ДЛЯ РАБОТЫ --- */
+
+/* Бургер-кнопка: по умолчанию скрыта на десктопах, но будет показана на мобильных */
+.mobile-menu-toggle {
+    /* display: none;  <-- ЭТУ СТРОКУ УДАЛЯЕМ ОТСЮДА, чтобы она не скрывала кнопку глобально */
+    background: none;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+    color: white; /* Установим конкретный цвет, если var(--text-color) не определен */
+    padding: 5px 10px;
+}
 
 /* Мобильная навигация (скрыта по умолчанию) */
 .mobile-nav {
-    display: none;
+    display: none; /* Остается скрытой по умолчанию */
     width: 100%;
-    background-color: #ffffff;
+    background-color: #061638; /* Цвет фона меню */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     overflow: hidden;
-    transition: max-height 0.3s ease-out;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out; /* Добавим opacity для плавности */
     max-height: 0;
-    transition-property: max-height, background-color;
+    opacity: 0;
+    flex-direction: column; /* Убедимся, что это колонка для мобильных */
 }
 
 .mobile-nav.open {
-    max-height: 300px; 
-    display: flex; 
-    flex-direction: column;
+    max-height: 300px; /* Достаточное значение для раскрытия меню */
+    opacity: 1; /* Полностью показываем */
+    display: flex; /* Показываем как flex-контейнер */
 }
 
 .mobile-nav ul {
     list-style: none;
     margin: 0;
     padding: 20px 0;
-    display: flex; 
+    display: flex;
     flex-direction: column;
-    align-items: center;
-}
-.mobile-nav li{
-  padding: 10px;
-  border-radius: 30px;
-  background-color:#007bff;
+    align-items: center; /* Центрируем элементы меню */
+    gap: 10px; /* Расстояние между элементами в моб. меню */
 }
 
-  
-@media (max-width: 768px) {
+.mobile-nav li {
+    padding: 10px;
+    border-radius: 30px;
+    background-color: #007bff;
+    width: 80%; /* Можно задать ширину для пунктов меню */
+    text-align: center;
+}
+.mobile-nav .nav-link { /* Стили для ссылок внутри мобильного меню */
+    color: white;
+    font-weight: 500;
+}
+.mobile-nav .nav-link.active {
+    color: rgb(56, 6, 97);
+}
+
+
+/* --- МЕДИА-ЗАПРОСЫ ДЛЯ АДАПТИВНОСТИ --- */
+
+@media (max-width: 768px) { /* Стили для экранов до 768px (мобильные) */
+    .App-header {
+        flex-direction: column; /* Элементы хедера будут друг под другом */
+        align-items: center;
+    }
     .desktop-nav {
-        display: none; 
+        display: none; /* Скрываем десктопное меню на мобильных */
     }
 
     .mobile-menu-toggle {
-        display: block; 
+        display: block; /* <-- ПОКАЗЫВАЕМ бургер-кнопку на мобильных */
+    }
+    /* .mobile-nav уже управляется классом .open через JS */
+}
+
+@media (min-width: 769px) { /* Стили для экранов от 769px (десктопы) */
+    .App-header {
+        flex-direction: row; /* Элементы хедера будут в строку */
+        justify-content: space-between; /* Лого слева, навигация справа */
+    }
+    .desktop-nav {
+        display: flex; /* Показываем десктопное меню на десктопах */
+        align-items: center; /* Центрируем по вертикали */
     }
 
-}
-.mobile-menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 2em;
-    cursor: pointer;
-    color: var(--text-color);
-    padding: 5px 10px;
+    .mobile-menu-toggle {
+        display: none; /* <-- СКРЫВАЕМ бургер-кнопку на десктопах */
+    }
+
+    .mobile-nav {
+        display: none !important; /* Убедимся, что мобильное меню полностью скрыто на десктопах */
+    }
 }
