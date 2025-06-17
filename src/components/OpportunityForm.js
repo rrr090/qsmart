@@ -246,7 +246,7 @@ function OpportunityForm() {
                 </div>
                 */}
 
-                <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+                <button type="submit" className="btn btn-primary-log" disabled={isSubmitting}>
                     {isSubmitting ? 'Сохранение...' : (formMode === 'add' ? 'Добавить возможность' : 'Обновить возможность')}
                 </button>
             </form>

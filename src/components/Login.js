@@ -53,7 +53,7 @@ function Login() {
                         required
                     />
                 </div>
-                <button type="submit" disabled={loading} className="btn btn-primary">
+                <button type="submit" disabled={loading} className="btn btn-primary-log">
                     {loading ? 'Вход...' : 'Войти'}
                 </button>
             </form>
