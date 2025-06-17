@@ -1,0 +1,86 @@
+/* src/pages/admin/OpportunityListAdmin.css */
+
+.admin-actions-header {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end; /* Выравнивает кнопку вправо */
+}
+
+.opportunities-table-container {
+    overflow-x: auto; /* Позволяет прокручивать таблицу по горизонтали на маленьких экранах */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.opportunities-table {
+    width: 100%;
+    border-collapse: collapse; /* Убирает двойные границы между ячейками */
+    font-size: 0.95em;
+    table-layout: fixed; /* Помогает избежать "съезжания" столбцов */
+}
+
+.opportunities-table th,
+.opportunities-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6; /* Легкая граница между строками */
+}
+
+.opportunities-table th {
+    background-color: #e9ecef; /* Светлый фон для заголовков */
+    font-weight: bold;
+    color: #495057;
+    text-transform: uppercase;
+    font-size: 0.85em;
+}
+
+.opportunities-table tbody tr:hover {
+    background-color: #f8f9fa; /* Легкий фон при наведении на строку */
+}
+
+.opportunities-table tbody tr:last-child td {
+    border-bottom: none; /* Убираем границу у последней строки */
+}
+
+.actions-cell {
+    white-space: nowrap; /* Предотвращает перенос кнопок на следующую строку */
+    width: 1%; /* Занимает минимально необходимую ширину */
+}
+
+.btn-sm {
+    padding: 6px 12px; /* Уменьшенные отступы для кнопок в таблице */
+    font-size: 0.85em;
+    margin-right: 8px; /* Отступ между кнопками */
+}
+
+.btn-sm:last-child {
+    margin-right: 0;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    color: white;
+    border: 1px solid #17a2b8;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+    border-color: #117a8b;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: 1px solid #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+.error-message {
+    color: #dc3545;
+    font-weight: bold;
+}

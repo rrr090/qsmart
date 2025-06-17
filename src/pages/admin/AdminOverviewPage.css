@@ -1,0 +1,84 @@
+/* src/pages/admin/AdminOverviewPage.css */
+
+.overview-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Отступы между карточками */
+    margin-bottom: 30px;
+}
+
+.overview-card {
+    background-color: #f8f9fa; /* Светлый фон для карточки */
+    border: 1px solid #e2e6ea;
+    border-radius: 8px;
+    padding: 25px;
+    flex: 1; /* Карточка будет занимать доступное пространство */
+    min-width: 250px; /* Минимальная ширина, чтобы не сжимались слишком сильно */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.overview-card h4 {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: #495057;
+    margin-bottom: 15px;
+}
+
+.count-number {
+    font-size: 3em; /* Крупный размер для числа */
+    font-weight: bold;
+    color: var(--primary-color); /* Используйте ваш основной цвет */
+    margin: 0;
+}
+
+.quick-links {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.quick-links h4 {
+    font-size: 1.5em;
+    color: #343a40;
+    margin-bottom: 20px;
+}
+
+.quick-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Отступы между кнопками */
+}
+
+.quick-links li {
+    /* Дополнительные стили, если нужны для элементов списка */
+}
+
+/* Переопределяем стили для кнопок, чтобы они лучше смотрелись в этом контексте */
+.quick-links .btn {
+    padding: 12px 25px;
+    font-size: 1em;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: 1px solid #6c757d;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+.error-message {
+    color: #dc3545;
+    font-weight: bold;
+}

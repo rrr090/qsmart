@@ -1,0 +1,78 @@
+/* src/components/OpportunityForm.css */
+
+.opportunity-form {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    max-width: 800px; /* Ограничиваем ширину формы */
+    margin: 0 auto; /* Центрируем форму */
+}
+
+.opportunity-form .form-group {
+    margin-bottom: 20px;
+}
+
+.opportunity-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.opportunity-form input[type="text"],
+.opportunity-form input[type="url"],
+.opportunity-form input[type="datetime-local"],
+.opportunity-form textarea,
+.opportunity-form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box; /* Важно для корректной ширины */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.opportunity-form input:focus,
+.opportunity-form textarea:focus,
+.opportunity-form select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), .25);
+    outline: none;
+}
+
+.opportunity-form textarea {
+    resize: vertical; /* Разрешить изменение размера по вертикали */
+    min-height: 100px;
+}
+
+.form-error-message {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.opportunity-form .btn-primary {
+    width: auto; /* Кнопка не на всю ширину */
+    padding: 12px 30px;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+.opportunity-form .btn-primary:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Адаптивность для формы на маленьких экранах */
+@media (max-width: 768px) {
+    .opportunity-form {
+        padding: 15px;
+        margin: 0; /* Убираем авто-отступы на мобильных */
+    }
+}

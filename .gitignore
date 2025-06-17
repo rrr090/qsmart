@@ -1,0 +1,91 @@
+# ====================================
+# Общие игнорируемые файлы для Node.js / npm
+# ====================================
+node_modules/
+dist/
+build/
+.parcel-cache/
+.eslintcache
+
+# Логи и кэши менеджеров пакетов
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.pnpm-store/
+lerna-debug.log*
+.npm/
+.yarn/
+
+# ====================================
+# Файлы окружения (Environment variables)
+# ====================================
+# Очень важно! Содержит конфиденциальные данные (API ключи Firebase)
+# или специфичные для локальной разработки настройки.
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ====================================
+# Общие игнорируемые файлы для React
+# ====================================
+# IDE files (e.g., VS Code)
+.vscode/
+.idea/
+
+# macOS files
+.DS_Store
+
+# Thumbnails (Windows)
+Thumbs.db
+
+# Output of 'npm run test'
+/coverage
+
+# Output of 'npm run build' (usually 'build' or 'dist' already above)
+# If your build output directory is different, add it here.
+
+# ====================================
+# Специфичные игнорируемые файлы для Firebase
+# ====================================
+# Локальные файлы эмуляторов Firebase
+.firebase/
+.firebase-debug.log
+firebase-debug.log*
+
+# Файлы из Firebase Hosting (если вы не хотите коммитить сгенерированное содержимое public)
+# Обычно 'public' содержит билд React-приложения, который должен быть игнорирован (см. 'build/' выше)
+# Если вы используете firebase init для настройки хостинга, и он создает папку 'public'
+# которая является выходной папкой вашего React-приложения, то она уже игнорируется через 'build/'
+# Если она называется иначе, например, 'dist' или 'out', добавьте ее здесь:
+# public/
+
+# Сервисные аккаунты или приватные ключи
+# НИКОГДА не коммитьте файлы с приватными ключами!
+# Обычно это JSON-файлы, которые вы скачиваете из Firebase/GCP Console.
+# Пример: serviceAccountKey.json
+*.json
+!package.json
+!package-lock.json
+!tsconfig.json
+!firebase.json # Это нужно коммитить, так как это конфигурация хостинга/функций
+!.firebaserc # Это нужно коммитить, так как это связывает проект с Firebase ID
+!eslintrc.json # если есть
+
+# ====================================
+# Другие возможные игнорируемые файлы
+# ====================================
+# Если вы используете Cypress или другие e2e тесты, которые генерируют видео/скриншоты
+# cypress/videos/
+# cypress/screenshots/
+
+# Vercel specific
+.vercel/
+
+# Netlify specific
+.netlify/
+
+# Storybook
+.storybook/out/

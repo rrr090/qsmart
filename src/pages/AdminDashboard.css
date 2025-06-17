@@ -1,0 +1,175 @@
+/* src/pages/AdminDashboard.css */
+
+.admin-dashboard-layout {
+    display: flex;
+    /* Занимаем оставшееся пространство, учитывая высоту хедера и футера */
+    min-height: calc(100vh - var(--header-height) - var(--footer-height));
+    background-color: #f4f7f6; /* Светлый фон для админки */
+}
+
+.admin-sidebar {
+    position: fixed;
+    width: 300px;
+    height: 500px;
+    background-color: #343a40; /* Темный фон боковой панели */
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-sidebar-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.admin-sidebar-header h2 {
+    color: #ffffff;
+    font-size: 1.8em;
+    margin-bottom: 5px;
+}
+
+.admin-email {
+    font-size: 0.9em;
+    color: #ced4da;
+}
+
+.admin-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.admin-nav li {
+    margin-bottom: 10px;
+}
+
+.admin-nav-link {
+    display: block;
+    color: #adb5bd; /* Светло-серый цвет ссылок */
+    text-decoration: none;
+    padding: 12px 15px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    font-size: 1.1em;
+}
+
+.admin-nav-link:hover,
+.admin-nav-link.active { /* Класс active для текущей активной ссылки */
+    background-color: #495057; /* Чуть темнее при наведении/активности */
+    color: #ffffff;
+}
+
+.admin-sidebar-footer {
+    margin-top: auto; /* Прижимает футер к низу сайдбара */
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.admin-logout-btn {
+    width: 100%;
+    /* Используем общие стили .btn .btn-danger из App.css */
+}
+
+.admin-content {
+    width: 75%;
+    flex-grow: 1; /* Занимает все оставшееся пространство */
+    padding: 30px;
+    background-color: #ffffff; /* Белый фон для контента */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05); /* Легкая внутренняя тень */
+}
+
+.admin-page-content {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.admin-page-content h3 {
+    font-size: 1.8em;
+    color: #343a40;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* Медиа-запросы для адаптивности админ-панели */
+@media (max-width: 992px) {
+    .admin-dashboard-layout {
+        flex-direction: column; /* Сайдбар сверху на маленьких экранах */
+    }
+
+    .admin-sidebar {
+        width: 100%;
+        height: auto;
+        padding: 15px 20px;
+        flex-direction: row; /* Элементы сайдбара в ряд */
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .admin-sidebar-header {
+        margin-bottom: 0;
+        text-align: left;
+    }
+
+    .admin-nav ul {
+        display: flex; /* Навигация в ряд */
+        flex-wrap: wrap;
+        margin-top: 10px; /* Отступ от заголовка */
+    }
+
+    .admin-nav li {
+        margin-right: 15px;
+        margin-bottom: 0;
+    }
+
+    .admin-nav-link {
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
+
+    .admin-sidebar-footer {
+        margin-top: 0;
+        padding-top: 0;
+        border-top: none;
+        margin-left: auto; /* Кнопка выхода справа */
+    }
+
+    .admin-logout-btn {
+        width: auto;
+        padding: 8px 15px;
+    }
+
+    .admin-content {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .admin-sidebar {
+        flex-direction: column; /* Сайдбар снова в столбец на очень маленьких экранах */
+        align-items: flex-start;
+    }
+
+    .admin-nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .admin-nav li {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .admin-logout-btn {
+        width: 100%;
+        margin-top: 15px;
+    }
+}
