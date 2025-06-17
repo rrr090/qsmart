@@ -7,6 +7,7 @@ import './OpportunitiesPage.css';
 const TYPE_MAPPINGS = {
     'Олимпиада': ['Олимпиада', 'Olympiad'], 
     'Конкурс': ['Конкурс', 'Contest'],
+    'Хакатон': ['Хакатон', 'Hackaton'],
     'Кружок': ['Кружок', 'Circle'],
     'Лекция': ['Лекция', 'Lecture'],
     'Грант': ['Грант', 'Grant'],
@@ -20,7 +21,7 @@ function OpportunitiesPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [sortOption, setSortOption] = useState('createdAt_desc');
-    const [filterType, setFilterType] = useState('Все'); // Теперь по умолчанию 'Все'
+    const [filterType, setFilterType] = useState('Все');
 
     useEffect(() => {
         const fetchOpportunities = async () => {
@@ -29,16 +30,15 @@ function OpportunitiesPage() {
                 const opportunitiesRef = collection(db, 'opportunities');
                 let q = opportunitiesRef;
 
-                // 1. Применяем фильтрацию по типу, если выбрано не 'Все'
+                
                 if (filterType !== 'Все') {
                     const possibleTypeValues = TYPE_MAPPINGS[filterType];
                     if (possibleTypeValues && possibleTypeValues.length > 0) {
-                        // Используем 'whereIn' для фильтрации по нескольким вариантам одного типа
                         q = query(q, where('type', 'in', possibleTypeValues));
                     }
                 }
 
-                // 2. Применяем сортировку
+                
                 switch (sortOption) {
                     case 'createdAt_asc':
                         q = query(q, orderBy('createdAt', 'asc'));
@@ -71,8 +71,7 @@ function OpportunitiesPage() {
         };
 
         fetchOpportunities();
-    }, [sortOption, filterType]); // Эффект будет перезапускаться при изменении sortOption и filterType
-
+    }, [sortOption, filterType]); 
     const handleSortChange = (e) => {
         setSortOption(e.target.value);
     };
@@ -136,7 +135,7 @@ function OpportunitiesPage() {
                             )}
                             <div className="card-content">
                                 <h3>{opportunity.title}</h3>
-                                <p className="card-type">Тип: {opportunity.type}</p> {/* Отображаем как есть из базы */}
+                                <p className="card-type">Тип: {opportunity.type}</p> 
                                 <p className="card-category">Категория: {opportunity.category}</p>
                                 <p className="card-organizer">Организатор: {opportunity.organizer}</p>
                                 <p className="card-description">{opportunity.description}</p>

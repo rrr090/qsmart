@@ -83,7 +83,7 @@
 .opportunity-card .btn-primary {
     margin-top: auto; /* Прижимает кнопку к низу карточки */
     display: block; /* Кнопка на всю ширину карточки */
-    width: 100%;
+    background-color: #007bff;
     padding: 10px 15px;
     text-align: center;
     text-decoration: none;
@@ -189,6 +189,7 @@
     border-color: var(--primary-color);
     box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), .25);
 }
+
 
 /* Медиа-запросы для адаптивности */
 @media (max-width: 768px) {

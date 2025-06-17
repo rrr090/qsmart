@@ -1,26 +1,58 @@
 // src/App.js
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, NavLink } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import OpportunitiesPage from './pages/OpportunitiesPage';
 import AboutPage from './pages/AboutPage';
 import Login from './components/Login';
 import AdminDashboard from './pages/AdminDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
-import { AuthProvider } from './contexts/AuthContext';
-import './App.css';
+import { AuthProvider, useAuth } from './contexts/AuthContext'; // Импортируем useAuth
+import './App.css'; // Ваш основной CSS-файл
 
 // Импортируем заглушки для новых админских страниц (пока что)
 import AdminOverviewPage from './pages/admin/AdminOverviewPage';
 import OpportunityListAdmin from './pages/admin/OpportunityListAdmin';
 import OpportunityForm from './components/OpportunityForm';
 
-function App() {
-    // const { currentUser } = useAuth(); // <--- ЭТУ СТРОКУ УДАЛЯЕМ из App.js
-    // Если вам нужен currentUser в App.js (например, для ссылки на админ-панель),
-    // то App.js сам должен быть обернут в AuthProvider или useAuth вызывается ниже.
-    // Пока что, для упрощения, мы вынесем логику показа ссылки на админ-панель.
+// --- Компонент HeaderNav - вынесен отдельно для чистоты и доступа к useAuth ---
+// Это позволит нам использовать useAuth для условного отображения ссылки на админ-панель
+function HeaderNav({ toggleMobileMenu }) {
+    const { currentUser } = useAuth(); // Используем хук useAuth здесь
 
+    // Функция для определения класса NavLink
+    const getNavLinkClass = ({ isActive }) =>
+        isActive ? "nav-link active" : "nav-link";
+
+    return (
+        <>
+            <nav className="main-nav desktop-nav">
+                <ul>
+                    <li>
+                        <NavLink to="/" className={getNavLinkClass}>Главная</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/opportunities" className={getNavLinkClass}>Все возможности</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/about" className={getNavLinkClass}>О нас</NavLink>
+                    </li>
+                    {/* Ссылка на админ-панель видна только если пользователь авторизован */}
+                    {currentUser && (
+                        <li>
+                            <NavLink to="/admin" className={getNavLinkClass}>Админ-панель</NavLink>
+                        </li>
+                    )}                     
+                </ul>
+            </nav>
+            <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
+                ☰
+            </button>
+        </>
+    );
+}
+
+function App() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const toggleMobileMenu = () => {
@@ -29,33 +61,25 @@ function App() {
 
     return (
         <Router>
-            <AuthProvider> 
+            <AuthProvider>
                 <div className="App">
                     <header className="App-header">
                         <div className="header-content">
                             <Link to="/" className="site-logo">
                                 QSMART
                             </Link>
-                            <nav className="main-nav desktop-nav">
-                                <ul>
-                                    <li><Link to="/">Главная</Link></li>
-                                    <li><Link to="/opportunities">Все возможности</Link></li>
-                                    <li><Link to="/about">О нас</Link></li>
-                                    {/* <AuthStatusLink /> // <--- Здесь можно использовать отдельный компонент для ссылки админки */}
-                                    {/* Временное решение: ссылка будет видна всегда, но доступ будет только авторизованным */}
-                                    <li><Link to="/admin">Админ-панель</Link></li>
-                                </ul>
-                            </nav>
-                            <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
-                                ☰
-                            </button>
+                            {/* Используем вынесенный компонент HeaderNav */}
+                            <HeaderNav toggleMobileMenu={toggleMobileMenu} />
                         </div>
+                        {/* Мобильное меню также используем NavLink */}
                         <nav className={`main-nav mobile-nav ${isMobileMenuOpen ? 'open' : ''}`}>
                             <ul>
-                                <li><Link to="/" onClick={toggleMobileMenu}>Главная</Link></li>
-                                <li><Link to="/opportunities" onClick={toggleMobileMenu}>Все возможности</Link></li>
-                                <li><Link to="/about" onClick={toggleMobileMenu}>О нас</Link></li>
-                                <li><Link to="/admin" onClick={toggleMobileMenu}>Админ-панель</Link></li>
+                                <li><NavLink to="/" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} onClick={toggleMobileMenu}>Главная</NavLink></li>
+                                <li><NavLink to="/opportunities" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} onClick={toggleMobileMenu}>Все возможности</NavLink></li>
+                                <li><NavLink to="/about" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} onClick={toggleMobileMenu}>О нас</NavLink></li>
+                                {/* Ссылку на админ-панель в мобильном меню также можно сделать условной, но для простоты она пока всегда видна */}
+                                <li><NavLink to="/admin" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} onClick={toggleMobileMenu}>Админ-панель</NavLink></li>
+                                <li><NavLink to="/admin/login" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")} onClick={toggleMobileMenu}>Войти</NavLink></li>
                             </ul>
                         </nav>
                     </header>
@@ -66,8 +90,10 @@ function App() {
                             <Route path="/opportunities" element={<OpportunitiesPage />} />
                             <Route path="/about" element={<AboutPage />} />
 
+                            {/* Маршрут для страницы входа */}
                             <Route path="/admin/login" element={<Login />} />
 
+                            {/* Защищенные маршруты для админ-панели */}
                             <Route
                                 path="/admin"
                                 element={
@@ -76,22 +102,23 @@ function App() {
                                     </ProtectedRoute>
                                 }
                             >
+                                {/* Вложенные маршруты для админ-панели */}
                                 <Route index element={<AdminOverviewPage />} />
                                 <Route path="opportunities" element={<OpportunityListAdmin />} />
                                 <Route path="opportunities/new" element={<OpportunityForm />} />
                                 <Route path="opportunities/edit/:id" element={<OpportunityForm />} />
                             </Route>
 
+                            {/* Маршрут 404 - Страница не найдена */}
                             <Route path="*" element={<h2>404 - Страница не найдена</h2>} />
                         </Routes>
                     </main>
 
                     <footer className="App-footer">
-                        <p>&copy; bzzz090
-                        </p>
+                        <p>&copy; bzzz090</p>
                     </footer>
                 </div>
-            </AuthProvider> 
+            </AuthProvider>
         </Router>
     );
 }

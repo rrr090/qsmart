@@ -173,6 +173,7 @@ function OpportunityForm() {
                     >
                         <option value="">Выберите тип</option>
                         <option value="Олимпиада">Олимпиада</option>
+                        <option value="Хакатон">Хакатон</option>
                         <option value="Конкурс">Конкурс</option>
                         <option value="Кружок">Кружок</option>
                         <option value="Лекция">Лекция</option>
