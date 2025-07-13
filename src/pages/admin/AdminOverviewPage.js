@@ -1,10 +1,8 @@
-// src/pages/admin/AdminOverviewPage.js
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { collection, getDocs } from 'firebase/firestore'; // Импортируем getDocs
-import { db } from '../../utils/firebaseConfig'; // Убедитесь, что путь к firebaseConfig правильный
-
-import './AdminOverviewPage.css'; // Создадим этот CSS-файл
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../utils/firebaseConfig'; 
+import './AdminOverviewPage.css';
 
 function AdminOverviewPage() {
     const [opportunityCount, setOpportunityCount] = useState(0);
@@ -16,7 +14,7 @@ function AdminOverviewPage() {
             try {
                 setLoading(true);
                 const querySnapshot = await getDocs(collection(db, 'opportunities'));
-                setOpportunityCount(querySnapshot.size); // .size возвращает количество документов
+                setOpportunityCount(querySnapshot.size);
             } catch (err) {
                 console.error("Ошибка при подсчете возможностей:", err);
                 setError("Не удалось загрузить количество возможностей.");
@@ -26,7 +24,7 @@ function AdminOverviewPage() {
         };
 
         fetchOpportunityCount();
-    }, []); // Пустой массив зависимостей означает, что эффект запустится один раз при монтировании
+    }, []); 
 
     return (
         <div className="admin-page-content">
@@ -60,7 +58,7 @@ function AdminOverviewPage() {
                             Просмотреть все возможности
                         </Link>
                     </li>
-                    {/* Добавьте другие полезные ссылки по мере необходимости */}
+                    {/* можно добавить другие полезные ссылки по мере необходимости */}
                 </ul>
             </div>
         </div>

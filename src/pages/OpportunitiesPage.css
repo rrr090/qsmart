@@ -1,37 +1,89 @@
 /* src/pages/OpportunitiesPage.css */
 
+/* --- 1. Контейнер страницы и заголовок --- */
 .opportunities-page-container {
-    padding: 30px 20px;
+    padding: var(--spacing-lg) var(--spacing-md); /* Отступы: 30px 20px -> lg md */
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 auto; /* Центрируем контейнер */
 }
 
 .opportunities-page-container h2 {
     text-align: center;
-    margin-bottom: 40px;
-    color: var(--text-color);
-    font-size: 2.5em;
+    margin-bottom: var(--spacing-xl); /* Отступ снизу: 40px -> xl */
+    color: var(--text-color-dark); /* Используем темный цвет текста */
+    font-size: 2.5em; /* Можно создать переменную --font-size-page-heading */
 }
 
+/* --- 2. Элементы управления (Фильтр и Сортировка) --- */
+.filter-sort-controls {
+    display: flex;
+    justify-content: space-between; /* Размещаем фильтр и сортировку по краям */
+    align-items: center;
+    margin-bottom: var(--spacing-lg); /* Отступ снизу: 30px -> lg */
+    gap: var(--spacing-md); /* Отступ между блоками: 20px -> md */
+}
+
+.filter-controls,
+.sort-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm); /* Отступ между элементами управления: 10px -> sm */
+}
+
+.filter-controls label,
+.sort-controls label {
+    font-size: 1em;
+    color: var(--text-color-dark); /* Используем темный цвет текста */
+    font-weight: bold;
+}
+
+.filter-select,
+.sort-select {
+    padding: var(--spacing-sm) 15px; /* Отступы: 10px 15px -> sm 15px */
+    border: 1px solid var(--border-color); /* Цвет границы из переменных */
+    border-radius: var(--border-radius-sm); /* Радиус скругления из переменных */
+    background-color: var(--background-card); /* Фон для селектов: #ffffff -> background-card */
+    font-size: 1em;
+    color: var(--text-color-dark); /* Цвет текста в селектах */
+    cursor: pointer;
+    outline: none;
+    transition: border-color var(--transition-speed) var(--transition-ease),
+                box-shadow var(--transition-speed) var(--transition-ease);
+}
+
+.filter-select:hover,
+.sort-select:hover {
+    border-color: var(--primary-dark-color); /* Цвет границы при наведении */
+}
+
+.filter-select:focus,
+.sort-select:focus {
+    border-color: var(--primary-color); /* Цвет границы при фокусе */
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb, 0, 123, 255), .25); /* Примечание: --primary-rgb должна быть определена в формате "R, G, B" */
+}
+
+/* --- 3. Сетка возможностей --- */
 .opportunities-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Адаптивная сетка */
-    gap: 25px; /* Отступы между карточками */
+    gap: var(--spacing-lg); /* Отступы между карточками: 25px -> lg */
 }
 
+/* --- 4. Карточки возможностей --- */
 .opportunity-card {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background-color: var(--background-card); /* Фон карточки: #ffffff -> background-card */
+    border-radius: var(--border-radius-sm); /* Радиус скругления: 10px -> sm */
+    box-shadow: 0 4px 15px var(--shadow-color); /* Тень: rgba(0, 0, 0, 0.1) -> shadow-color */
     overflow: hidden; /* Обрезаем, чтобы изображение не выходило за рамки */
     display: flex;
     flex-direction: column;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    transition: transform var(--transition-speed) var(--transition-ease),
+                box-shadow var(--transition-speed) var(--transition-ease);
 }
 
 .opportunity-card:hover {
     transform: translateY(-5px); /* Легкий эффект поднятия */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Чуть более выраженная тень при наведении */
 }
 
 .opportunity-card-image {
@@ -42,17 +94,17 @@
 }
 
 .card-content {
-    padding: 20px;
+    padding: var(--spacing-md); /* Отступ внутри карточки: 20px -> md */
     flex-grow: 1; /* Контентная часть будет занимать оставшееся пространство */
     display: flex;
     flex-direction: column;
 }
 
 .card-content h3 {
-    font-size: 1.5em;
-    color: var(--primary-color);
+    font-size: 1.5em; /* Можно создать переменную --font-size-card-title */
+    color: var(--primary-color); /* Цвет заголовка карточки */
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: var(--spacing-sm); /* Отступ снизу: 10px -> sm */
     min-height: 2.5em; /* Минимальная высота для заголовка */
     line-height: 1.2;
 }
@@ -61,18 +113,18 @@
 .card-category,
 .card-organizer,
 .card-deadline {
-    font-size: 0.9em;
-    color: #6c757d;
+    font-size: 0.9em; /* Можно создать переменную --font-size-card-meta */
+    color: var(--text-color-muted); /* Приглушенный цвет текста */
     margin-bottom: 5px;
 }
 
 .card-description {
-    font-size: 1em;
-    color: var(--text-color);
-    margin-top: 15px;
-    margin-bottom: 20px;
+    font-size: 1em; /* Можно создать переменную --font-size-card-description */
+    color: var(--text-color-dark); /* Цвет описания */
+    margin-top: var(--spacing-sm); /* Отступ сверху: 15px -> sm */
+    margin-bottom: var(--spacing-md); /* Отступ снизу: 20px -> md */
     line-height: 1.5;
-    /* Ограничение по количеству строк, если нужно */
+    /* Ограничение по количеству строк */
     display: -webkit-box;
     -webkit-line-clamp: 3; /* Ограничиваем 3 строками */
     -webkit-box-orient: vertical;
@@ -83,140 +135,66 @@
 .opportunity-card .btn-primary {
     margin-top: auto; /* Прижимает кнопку к низу карточки */
     display: block; /* Кнопка на всю ширину карточки */
-    background-color: #007bff;
-    padding: 10px 15px;
+    background-color: var(--button-block-color); /* Цвет кнопки: #007bff -> button-block-color */
+    color: var(--text-color-dark); /* Цвет текста на кнопке */
+    padding: var(--spacing-sm) 15px; /* Отступы: 10px 15px -> sm 15px */
     text-align: center;
     text-decoration: none;
     font-size: 1em;
-    border-radius: 5px;
+    border-radius: var(--border-radius-sm); /* Радиус скругления */
+    transition: background-color var(--transition-speed) var(--transition-ease),
+                transform var(--transition-speed) var(--transition-ease),
+                box-shadow var(--transition-speed) var(--transition-ease);
 }
 
+.opportunity-card .btn-primary:hover {
+    background-color: var(--primary-dark-color); /* Темный оттенок при наведении */
+    transform: translateY(-2px); /* Легкий подъем */
+    box-shadow: 0 4px 10px var(--primary-shadow-color); /* Тень */
+}
+
+
+/* --- 5. Сообщения о состоянии --- */
 .loading-message,
 .error-message,
 .no-opportunities-message {
     text-align: center;
-    font-size: 1.2em;
-    color: #6c757d;
-    margin-top: 50px;
+    font-size: 1.2em; /* Можно создать переменную --font-size-message */
+    color: var(--text-color-muted); /* Приглушенный цвет текста */
+    margin-top: var(--spacing-xl); /* Отступ сверху: 50px -> xl */
 }
 
 .error-message {
-    color: #dc3545;
+    color: var(--danger-color); /* Цвет ошибки */
     font-weight: bold;
 }
 
-.sort-controls {
-    display: flex;
-    justify-content: flex-end; /* Выравнивание по правому краю */
-    align-items: center;
-    margin-bottom: 30px; /* Отступ от сетки возможностей */
-    gap: 10px; /* Отступ между лейблом и селектором */
-}
-
-.sort-controls label {
-    font-size: 1em;
-    color: var(--text-color);
-    font-weight: bold;
-}
-
-.sort-select {
-    padding: 10px 15px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    background-color: #ffffff;
-    font-size: 1em;
-    color: #495057;
-    cursor: pointer;
-    outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.sort-select:hover {
-    border-color: #a0aec0;
-}
-
-.sort-select:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), .25);
-}
-/* src/pages/OpportunitiesPage.css */
-
-/* ... (весь предыдущий CSS код) ... */
-
-/* Добавляем стили для фильтра и сортировки */
-.filter-sort-controls {
-    display: flex;
-    justify-content: space-between; /* Размещаем фильтр и сортировку по краям */
-    align-items: center;
-    margin-bottom: 30px;
-    gap: 20px; /* Отступ между блоками */
-}
-
-.filter-controls,
-.sort-controls {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.filter-controls label,
-.sort-controls label {
-    font-size: 1em;
-    color: var(--text-color);
-    font-weight: bold;
-}
-
-.filter-select,
-.sort-select {
-    padding: 10px 15px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    background-color: #ffffff;
-    font-size: 1em;
-    color: #495057;
-    cursor: pointer;
-    outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.filter-select:hover,
-.sort-select:hover {
-    border-color: #a0aec0;
-}
-
-.filter-select:focus,
-.sort-select:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), .25);
-}
-
-
-/* Медиа-запросы для адаптивности */
+/* --- 6. Медиа-запросы для адаптивности --- */
 @media (max-width: 768px) {
     .opportunities-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Одна колонка на мобильных */
     }
 
     .opportunities-page-container {
-        padding: 20px 15px;
+        padding: var(--spacing-md) var(--spacing-sm); /* Уменьшаем отступы на мобильных */
     }
 
     .opportunities-page-container h2 {
-        font-size: 2em;
-        margin-bottom: 30px;
+        font-size: 2em; /* Меньший заголовок на мобильных */
+        margin-bottom: var(--spacing-lg); /* Отступ снизу: 30px -> lg */
     }
 
     .filter-sort-controls {
-        flex-direction: column; /* Размещаем фильтр и сортировку в столбец на мобильных */
+        flex-direction: column; /* Размещаем фильтр и сортировку в столбец */
         align-items: stretch; /* Растягиваем элементы на всю ширину */
-        gap: 15px;
+        gap: var(--spacing-sm); /* Отступ между блоками: 15px -> sm */
     }
 
     .filter-controls,
     .sort-controls {
         justify-content: center; /* Центрируем на мобильных */
         flex-direction: column; /* Элементы в столбец на мобильных */
-        gap: 5px;
+        gap: 5px; /* Маленький отступ внутри контролов */
     }
 
     .filter-select,

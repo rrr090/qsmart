@@ -31,7 +31,7 @@ function Login() {
     return (
         <div className="login-container">
             <form onSubmit={handleSubmit} className="login-form">
-                <h2>Вход в админ-панель</h2>
+                <h2>Войти в Аккаунт</h2>
                 {error && <p className="error-message">{error}</p>}
                 <div className="form-group">
                     <label htmlFor="email">Email:</label>

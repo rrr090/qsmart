@@ -1,0 +1,45 @@
+/* src/styles/variables.css */
+
+:root {
+  /* --- Brand & UI Colors --- */
+  --background-main: #ffffff; /* Фон страницы */
+  --text-color-dark: #303c6c; /* Цвет текста */
+  --shadow-color: #b8b7b2;    /* Тень картинок/элементов */
+  --button-block-color: #b4dfe5; /* Цвет кнопок и блоков с разделами */
+  --header-top-color: #d2fdff; /* Цвет верхней части страницы (header) */
+
+  /* --- General UI Colors  --- */
+  --primary-color: var(--button-block-color); /* Используем цвет кнопок как основной */
+  --primary-dark-color: #8db5ba; /* Более темный оттенок для hover/active, подбираем к button-block-color */
+  --text-on-primary: var(--text-color-dark); /* Цвет текста на кнопках/блоках */
+  --border-color: #e0e0e0; /* Общий цвет границ */
+
+  /* --- Other common variables  --- */
+  --font-family-primary: 'Noto Serif', sans-serif; 
+  --font-bad-script: "Bad Script", cursive;
+  --font-pacifico: "Pacifico", cursive;
+  --font-size-base: 16px;
+
+
+  /* --- Отступы/Размеры --- */
+  --spacing-xs: 5px;
+  --spacing-sm: 10px;
+  --spacing-md: 20px;
+  --spacing-lg: 30px;
+  --spacing-xl: 40px;
+
+  --border-radius-sm: 5px;
+  --border-radius-md: 10px;
+  --border-radius-lg: 30px; 
+
+  /* --- Переходы --- */
+  --transition-speed-fast: 0.2s;
+  --transition-speed: 0.3s;
+  --transition-speed-slow: 0.5s;
+  --transition-ease: ease;
+
+  /* --- НОВЫЕ ПЕРЕМЕННЫЕ ДЛЯ ФИКСИРОВАННЫХ ВЫСОТ --- */
+  --header-fixed-height: 80px; /* Фиксированная высота для хедера */
+  --nav-fixed-height: 60px;    /* Фиксированная высота для основной навигации */
+  --footer-fixed-height: 60px; /* Фиксированная высота для футера */
+  }

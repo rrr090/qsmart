@@ -1,9 +1,8 @@
-// src/pages/admin/OpportunityListAdmin.js
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { collection, onSnapshot, query, orderBy, deleteDoc, doc } from 'firebase/firestore';
-import { db } from '../../utils/firebaseConfig'; // Убедитесь, что путь к firebaseConfig правильный
-import './OpportunityListAdmin.css'; // Создадим этот CSS-файл для таблицы
+import { db } from '../../utils/firebaseConfig'; 
+import './OpportunityListAdmin.css'; 
 
 function OpportunityListAdmin() {
     const [opportunities, setOpportunities] = useState([]);
@@ -11,13 +10,11 @@ function OpportunityListAdmin() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        // Создаем запрос к коллекции 'opportunities', упорядочиваем по дате создания
         const opportunitiesQuery = query(
             collection(db, 'opportunities'),
-            orderBy('createdAt', 'desc') // Предполагаем, что у вас есть поле 'createdAt'
+            orderBy('createdAt', 'desc') 
         );
 
-        // Подписываемся на изменения в коллекции в реальном времени
         const unsubscribe = onSnapshot(opportunitiesQuery,
             (snapshot) => {
                 const opportunitiesData = snapshot.docs.map(doc => ({
@@ -34,7 +31,6 @@ function OpportunityListAdmin() {
             }
         );
 
-        // Отписываемся от слушателя при размонтировании компонента
         return () => unsubscribe();
     }, []);
 
