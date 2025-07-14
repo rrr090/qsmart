@@ -1,381 +1,372 @@
-/* src/App.css */
+  /* src/App.css */
 
-/* --- 1. Variables Import --- */
-@import './styles/variables.css';
-@import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Pacifico&display=swap');
+  /* --- 1. Variables Import --- */
+  @import './styles/variables.css';
+  @import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Pacifico&display=swap');
+  @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
-/* --- 2. Base Styles & Sticky Footer Setup --- */
-/* Ensure html, body, and the root React element take full height */
-html,
-body,
-#root {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
+  /* --- 2. Base Styles & Sticky Footer Setup --- */
+  /* Ensure html, body, and the root React element take full height */
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
 
-.App {
-  display: flex; /* Make the App container a Flexbox */
-  flex-direction: column; /* Stack children vertically */
-  min-height: 100vh; /* Ensure App takes at least full viewport height */
-  /* text-align: center; Keep this only if you need overall center alignment */
-  min-height: 700px; /* Подберите это значение так, чтобы оно было больше самой высокой вашей страницы. */
-                     /* Возможно, calc(100vh - высота_хедера - высота_навигации - высота_футера) тоже подойдет, если они фиксированы. */  
-}
+  .App {
+    display: flex; /* Make the App container a Flexbox */
+    flex-direction: column; /* Stack children vertically */
+    min-height: 100vh; /* Ensure App takes at least full viewport height */
+    max-height: 100vh;
+    /* text-align: center; Keep this only if you need overall center alignment */
+  }
 
-body {
-  background-color: var(--background-main); /* Main page background */
-  color: var(--text-color-dark); /* Default text color */
-  font-family: var(--font-family-primary); /* Primary font family */
-  font-size: var(--font-size-base); /* Base font size */
-}
+  body {
+    background-color: var(--background-main); /* Main page background */
+    color: var(--text-color-dark); /* Default text color */
+    font-family: var(--font-family-primary); /* Primary font family */
+    font-size: var(--font-size-base); /* Base font size */
+  }
 
-a {
-  text-decoration: none; /* Remove underline from all links by default */
-  color: var(--text-color-dark); /* Default link color (can be overridden) */
-}
+  a {
+    text-decoration: none; /* Remove underline from all links by default */
+    color: var(--text-color-dark); /* Default link color (can be overridden) */
+  }
 
-/* --- 3. Header Styles --- */
-.App-header {
-  background-color: var(--header-top-color); /* Top part of the page */
-  min-height: 10vh;
-  display: flex;
-  flex-direction: column; /* Default for mobile: stack elements */
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin); 
-  color: var(--text-color-dark); /* Text color for header content */
-  padding: var(--spacing-md) var(--spacing-lg);
-  border-bottom: 3px solid var(--text-color-dark); /* Border color and thickness */
-  flex-shrink: 0; /* Prevent header from shrinking */
-}
-
-.header-content {
-  width: 100%;
-  display: flex;
-  margin-left: 50px;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.site-logo {
-  font-family: var(--font-pacifico);
-  font-weight: 700;
-  font-style: normal;
-  color: var(--text-color-dark);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  transition: all var(--transition-speed) var(--transition-ease);
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.site-logo:hover {
-  color: var(--text-color-dark); /* Consider a darker shade for hover if text-color-dark is primary */
-  transform: scale(1.05);
-  text-shadow: 1px 1px 4px var(--shadow-color);
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-link {
-  color: #61dafb; /* Keep specific link color if needed */
-}
-
-/* --- 4. Main Content Styles --- */
-/* --- 4.1 Main Navigation  --- */
-.main-navigation {
-  flex-shrink: 0;
-  width: fit-content; /* Контейнер будет занимать только необходимую ширину своего содержимого */
-  margin-left: 20px; 
-}
-
-.desktop-nav-list {
-  list-style: none;
-  display: flex; 
-  gap: var(--spacing-sm); 
-  margin: 0; 
-  padding: 0;
-}
-
-.desktop-nav-list li {
-  background-color: var(--button-block-color); 
-  border: 3px solid var(--text-color-dark); /* ДОБАВЛЯЕМ ГРАНИЦУ КНОПКАМ */
-  transition: all var(--transition-speed) var(--transition-ease);
-  transform: translateY(-3px);
-}
-
-.desktop-nav-list li button { /* Стили для кнопки "Выйти" */
-  background-color: var(--button-block-color); 
-  display: block;
-  text-decoration: none;
-  color: var(--text-color-dark); /* Цвет текста на кнопках */
-  font-weight: 500;
-  font-family: var(--font-family-primary);
-  font-size: var(--font-size-base); /* Base font size */
-  cursor: pointer;
-  border: none;
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-}
-
-.desktop-nav-list li button:hover{
-  background-color: var(--header-top-color);
-  box-shadow: 0 6px 15px var(--primary-shadow-color);
-  color: var(--text-color-light); /* Светлый цвет текста для активной кнопки */
-  font-weight: bold;
-}
-
-.desktop-nav-list li:hover,
-.desktop-nav-list li.active,
-.desktop-nav-list li:has(.nav-link.active) {
-  background-color: var(--header-top-color); /* Темнее при наведении/активности */
-  border-color: var(--text-color-dark); /* Изменяем цвет границы при наведении/активности */
-  box-shadow: 0 6px 15px var(--primary-shadow-color);
-}
-
-/* NavLink common styles */
-.nav-link {
-  display: block;
-  text-decoration: none;
-  color: var(--text-color-dark); /* Цвет текста на кнопках */
-  font-weight: 500;
-}
-
-/* NavLink active styles */
-.nav-link.active {
-  color: var(--text-color-light); /* Светлый цвет текста для активной кнопки */
-  font-weight: bold;
-}
-
-/* --- 4.2 Main content --- */
-.App-main {
-  flex-grow: 1; /* Ключ для липкого футера: основной контент расширяется, чтобы заполнить пространство */
-  padding: var(--spacing-md); /* Добавьте консистентный отступ */
-  background-color: var(--background-main); 
-
-  /* --- НОВЫЕ СВОЙСТВА ДЛЯ ВЫРАВНИВАНИЯ КОНТЕНТА ВНУТРИ App-main --- */
-  display: flex; /* Делаем App-main Flex-контейнером */
-  flex-direction: column; /* Элементы внутри будут располагаться в колонку */
-  justify-content: center; /* Центрируем содержимое по вертикали */
-  align-items: center; /* Центрируем содержимое по горизонтали */
-  /* Если ваш контент должен быть слева, а не по центру, удалите align-items: center;
-     или используйте align-items: flex-start; */
-  
-}
-
-/* --- 5. Footer Styles --- */
-.App-footer {
-  border-top: 3px solid var(--text-color-dark); /* Граница сверху */
-  color: var(--text-color-dark); /* Цвет текста футера */
-  padding: var(--spacing-md); /* Отступы футера */
-  flex-shrink: 0; /* Предотвращает сжатие футера */
-  display: flex; 
-  justify-content: space-between;
-  align-items: center;
-  font-size: var(--font-size-base); 
-  background-color: var(--header-top-color); /* Добавим фон, чтобы футер был виден */
-}
-
-/* Стили для ссылок внутри футера */
-.App-footer a {
-    color: var(--text-color-dark); /* Цвет ссылки */
-    text-decoration: none;
-    font-weight: bold;
-    transition: color var(--transition-speed) var(--transition-ease);
-}
-
-.App-footer a:hover {
-    color: var(--primary-dark-color); /* Цвет ссылки при наведении */
-    
-}
-
-.App-footer .footer-center {
+  /* --- 3. Header Styles --- */
+  .App-header {
+    z-index: 100;
+    background-color: var(--header-top-color); /* Top part of the page */
+    height: var(--header-fixed-height);
+    display: flex;
+    flex-direction: column; /* Default for mobile: stack elements */
     align-items: center;
-    display: block;
+    justify-content: center;
+    font-size: calc(10px + 2vmin); 
+    color: var(--text-color-dark); /* Text color for header content */
+    padding: 0 var(--spacing-lg);
+    border-bottom: 3px solid var(--text-color-dark); /* Border color and thickness */
+    flex-shrink: 0; /* Prevent header from shrinking */
+  }
+
+  .header-content {
+    width: 100%;
+    display: flex;
     margin-left: 50px;
-    margin-right: auto;
-    gap: 8px; /* Отступ между флагом и текстом */
-}
-
-.App-footer .footer-center span[role="img"] {
-    font-size: 1.2em; /* Размер флага */
-}
-
-/* Адаптация футера для мобильных */
-@media (max-width: 768px) {
-    .App-footer {
-        flex-direction: column; /* Элементы в столбец на мобильных */
-        text-align: center; /* Центрируем текст */
-        gap: var(--spacing-sm); /* Отступ между элементами */
-        padding: var(--spacing-md) var(--spacing-sm); /* Уменьшаем горизонтальный padding */
-    }
-
-    .App-footer .footer-left,
-    .App-footer .footer-center,
-    .App-footer .footer-right {
-        width: 100%; /* Занимают всю ширину */
-        text-align: center; /* Центрируем текст */
-    }
-}
-
-
-/* --- 6. Navigation (Desktop & Mobile) Styles --- */
-
-/* Desktop Navigation (Visible by default, hidden on mobile) */
-.desktop-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 2rem;
-}
-
-.desktop-nav li {
-  padding: var(--spacing-sm);
-  background-color: var(--button-block-color); /* Buttons/sections color */
-  transition: all var(--transition-speed) var(--transition-ease);
-}
-
-.desktop-nav li:hover,
-.desktop-nav li.active {
-  background-color: var(--background-main); /* White background for hover/active */
-  color: var(--text-color-dark); /* Dark text color */
-  transform: translateY(+3px);
-  box-shadow: 0 6px 15px var(--primary-shadow-color); /* Shadow using primary color */
-}
-
-/* NavLink common styles */
-.nav-link {
-  display: block;
-  padding: calc(2 * var(--spacing-sm)) calc(2 * var(--spacing-md));
-  text-decoration: none;
-  color: var(--text-color-dark); /* Default text color for NavLinks */
-  font-weight: 500;
-  transition: all var(--transition-speed) var(--transition-ease);
-}
-
-/* NavLink active styles */
-.nav-link.active {
-  color: rgb(56, 6, 97); /* Specific active color from your example */
-  font-weight: bold;
-  /* Ensure active state also matches hover if desired, e.g.: */
-  /* background-color: var(--background-main); */
-  /* box-shadow: 0 6px 15px var(--primary-shadow-color); */
-}
-
-
-/* Mobile Menu Toggle (Hidden by default on desktop, shown on mobile) */
-.mobile-menu-toggle {
-  background: none;
-  border: none;
-  font-size: 2em;
-  cursor: pointer;
-  color: var(--text-color-dark); /* Color of the burger icon */
-  padding: 5px 10px;
-}
-
-/* Mobile Navigation (Hidden by default, shown via JS 'open' class) */
-.mobile-nav {
-  display: none; /* Hidden by default */
-  width: 100%;
-  background-color: var(--header-top-color); /* Mobile menu background */
-  box-shadow: 0 2px 10px var(--shadow-color);
-  overflow: hidden;
-  max-height: 0; /* For smooth transition */
-  opacity: 0; /* For smooth fade */
-  flex-direction: column; /* Stack items vertically */
-  transition: max-height var(--transition-speed) var(--transition-ease), opacity var(--transition-speed) var(--transition-ease);
-}
-
-.mobile-nav.open {
-  max-height: 300px; /* Sufficient height to reveal content */
-  opacity: 1; /* Fully visible */
-  display: flex; /* Show as flex container */
-}
-
-.mobile-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: var(--spacing-md) 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-sm);
-}
-
-.mobile-nav li {
-  padding: var(--spacing-sm);
-  border-radius: var(--border-radius-lg);
-  background-color: var(--button-block-color);
-  width: 80%;
-  text-align: center;
-}
-
-.mobile-nav .nav-link {
-  color: var(--text-color-dark);
-  font-weight: 500;
-}
-
-.mobile-nav .nav-link.active {
-  color: rgb(56, 6, 97); /* Specific active color for mobile NavLink */
-}
-
-
-/* --- 7. Filters Section --- */
-.filters {
-  display: flex;
-  justify-content: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-lg);
-  flex-wrap: wrap;
-}
-
-.filters button {
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: none;
-  border-radius: var(--border-radius-sm);
-  background-color: var(--background-main); /* Using main background for default button */
-  color: var(--text-color-dark); /* Text color for default button */
-  cursor: pointer;
-  transition: background-color var(--transition-speed) var(--transition-ease);
-}
-
-.filters button.active {
-  background-color: var(--button-block-color); /* Active filter button color */
-  color: var(--text-color-dark); /* Text color for active filter button */
-}
-
-/* --- 8. Media Queries for Responsiveness --- */
-
-@media (max-width: 768px) { /* Mobile Styles */
-  .App-header {
-    flex-direction: column; /* Stack header items */
+    justify-content: space-between;
     align-items: center;
   }
-  .desktop-nav {
-    display: none; /* Hide desktop nav on mobile */
-  }
-  .mobile-menu-toggle {
-    display: block; /* Show burger icon on mobile */
-  }
-}
 
-@media (min-width: 769px) { /* Desktop Styles */
-  .App-header {
-    flex-direction: row; /* Arrange header items in a row */
-    justify-content: space-between; /* Space out logo and nav */
+  .site-logo {
+    font-family: var(--font-pacifico);
+    font-weight: 700;
+    font-style: normal;
+    color: var(--text-color-dark);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all var(--transition-speed) var(--transition-ease);
+    cursor: pointer;
+    text-decoration: none;
   }
-  .desktop-nav {
-    display: flex; /* Show desktop nav on desktop */
+
+  .site-logo:hover {
+    color: var(--text-color-dark); /* Consider a darker shade for hover if text-color-dark is primary */
+    transform: scale(1.05);
+    text-shadow: 1px 1px 4px var(--shadow-color);
+  }
+
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+
+  .App-link {
+    color: #61dafb; /* Keep specific link color if needed */
+  }
+
+  /* --- 4. Main Content Styles --- */
+  /* --- 4.1 Main Navigation  --- */
+  .main-navigation {
+    flex-shrink: 0;
+    height: var(--nav-fixed-height);
+    width: fit-content; /* Контейнер будет занимать только необходимую ширину своего содержимого */
+    margin-left: 20px; 
+  }
+
+  .desktop-nav-list {  
+    position: relative;
+    list-style: none;
+    display: flex;
+    opacity: 1;
+    transform: translateY(-56px);
+    visibility: visible;
+    transition: all 0.7s ease;
+    z-index: 0; 
+    gap: var(--spacing-sm); 
+    margin: 0; 
+    padding: 0;
+  }
+  
+  .main-navigation:hover .desktop-nav-list{
+    opacity: 1;
+    z-index: 2;
+    visibility: visible;
+    transform: translateY(-2px);
+    display:flex
+  }
+
+  .desktop-nav-list li {
+    background-color: var(--button-block-color); 
+    border: 3px solid var(--text-color-dark); /* ДОБАВЛЯЕМ ГРАНИЦУ КНОПКАМ */
+    transition: all var(--transition-speed) var(--transition-ease);
+    transform: translateY(-3px);
+  }
+
+  .desktop-nav-list li button { /* Стили для кнопки "Выйти" */
+    background-color: var(--button-block-color); 
+    display: block;
+    text-decoration: none;
+    color: var(--text-color-dark); /* Цвет текста на кнопках */
+    font-weight: 500;
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base); /* Base font size */
+    cursor: pointer;
+    border: none;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+  }
+
+  .desktop-nav-list li button:hover{
+    background-color: var(--header-top-color);
+    box-shadow: 0 6px 15px var(--primary-shadow-color);
+    color: var(--text-color-light); /* Светлый цвет текста для активной кнопки */
+    font-weight: bold;
+  }
+
+  .desktop-nav-list li:hover,
+  .desktop-nav-list li.active,
+  .desktop-nav-list li:has(.nav-link.active) {
+    background-color: var(--header-top-color); /* Темнее при наведении/активности */
+    border-color: var(--text-color-dark); /* Изменяем цвет границы при наведении/активности */
+    box-shadow: 0 6px 15px var(--primary-shadow-color);
+    transform: translateY(0px);
+    
+  }
+  
+
+  /* NavLink common styles */
+  .nav-link {
+    display: block;
+    text-decoration: none;
+    color: var(--text-color-dark); /* Цвет текста на кнопках */
+    font-weight: 500;
+  }
+
+  /* NavLink active styles */
+  .nav-link.active {
+    color: var(--text-color-light); /* Светлый цвет текста для активной кнопки */
+    font-weight: bold;
+  }
+
+  /* --- 4.2 Main content --- */
+  .App-main {
+    overflow-y: auto;
+    flex-grow: 1; /* Ключ для липкого футера: основной контент расширяется, чтобы заполнить пространство */
+    padding: var(--spacing-md); /* Добавьте консистентный отступ */
+    background-color: var(--background-main); 
+    flex-direction: column; /* Элементы внутри будут располагаться в колонку */
+    justify-content: center; /* Центрируем содержимое по вертикали */
+    align-items: flex-start; 
+  }
+
+  /* --- 5. Footer Styles --- */
+  .App-footer {
+    border-top: 3px solid var(--text-color-dark); /* Граница сверху */
+    color: var(--text-color-dark); /* Цвет текста футера */
+    height: var(--footer-fixed-height);
+    padding: 0 var(--spacing-md); /* Отступы футера */
+    flex-shrink: 0; /* Предотвращает сжатие футера */
+    display: flex; 
+    justify-content: space-between;
     align-items: center;
+    font-size: var(--font-size-base); 
+    background-color: var(--header-top-color); /* Добавим фон, чтобы футер был виден */
   }
+
+  /* Стили для ссылок внутри футера */
+  .App-footer a {
+      color: var(--text-color-dark); /* Цвет ссылки */
+      text-decoration: none;
+      font-weight: bold;
+      transition: color var(--transition-speed) var(--transition-ease);
+  }
+
+  .App-footer a:hover {
+      color: var(--primary-dark-color); /* Цвет ссылки при наведении */
+      
+  }
+
+  .App-footer .footer-center {
+      align-items: center;
+      display: block;
+      margin-left: 50px;
+      margin-right: auto;
+      gap: 8px; /* Отступ между флагом и текстом */
+  }
+
+  .App-footer .footer-center span[role="img"] {
+      font-size: 1.2em; /* Размер флага */
+  }
+
+  /* Адаптация футера для мобильных */
+  @media (max-width: 768px) {
+      .App-footer {
+          text-align: center; /* Центрируем текст */
+          gap: var(--spacing-sm); /* Отступ между элементами */
+          padding: var(--spacing-md) var(--spacing-sm); /* Уменьшаем горизонтальный padding */
+      }
+
+      .App-footer .footer-left,
+      .App-footer .footer-center,
+      .App-footer .footer-right {
+          width: 100%; /* Занимают всю ширину */
+          text-align: center; /* Центрируем текст */
+      }
+  }
+
+
+  /* --- 6. Navigation (Desktop & Mobile) Styles --- */
+
+  /* NavLink common styles */
+  .nav-link {
+    display: block;
+    padding: calc(2 * var(--spacing-sm)) calc(2 * var(--spacing-md));
+    text-decoration: none;
+    color: var(--text-color-dark); /* Default text color for NavLinks */
+    font-weight: 500;
+    transition: all var(--transition-speed) var(--transition-ease);
+  }
+
+  /* NavLink active styles */
+  .nav-link.active {
+    color: rgb(56, 6, 97); /* Specific active color from your example */
+    font-weight: bold;
+    /* Ensure active state also matches hover if desired, e.g.: */
+    /* background-color: var(--background-main); */
+    /* box-shadow: 0 6px 15px var(--primary-shadow-color); */
+  }
+
+
+  /* Mobile Menu Toggle (Hidden by default on desktop, shown on mobile) */
   .mobile-menu-toggle {
-    display: none; /* Hide burger icon on desktop */
+    background: none;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+    color: var(--text-color-dark); /* Color of the burger icon */
+    padding: 5px 10px;
   }
+
+  /* Mobile Navigation (Hidden by default, shown via JS 'open' class) */
   .mobile-nav {
-    display: none !important; /* Ensure mobile nav is hidden on desktop */
+    display: none; /* Hidden by default */
+    width: 100%;
+    background-color: var(--header-top-color); /* Mobile menu background */
+    box-shadow: 0 2px 10px var(--shadow-color);
+    overflow: hidden;
+    max-height: 0; /* For smooth transition */
+    opacity: 0; /* For smooth fade */
+    flex-direction: column; /* Stack items vertically */
+    transition: max-height var(--transition-speed) var(--transition-ease), opacity var(--transition-speed) var(--transition-ease);
   }
-}
+
+  .mobile-nav.open {
+    max-height: 300px; /* Sufficient height to reveal content */
+    opacity: 1; /* Fully visible */
+    display: flex; /* Show as flex container */
+  }
+
+  .mobile-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: var(--spacing-md) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .mobile-nav li {
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-lg);
+    background-color: var(--button-block-color);
+    width: 80%;
+    text-align: center;
+  }
+
+  .mobile-nav .nav-link {
+    color: var(--text-color-dark);
+    font-weight: 500;
+  }
+
+  .mobile-nav .nav-link.active {
+    color: rgb(56, 6, 97); /* Specific active color for mobile NavLink */
+  }
+
+
+  /* --- 7. Filters Section --- */
+  .filters {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    flex-wrap: wrap;
+  }
+
+  .filters button {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    background-color: var(--background-main); /* Using main background for default button */
+    color: var(--text-color-dark); /* Text color for default button */
+    cursor: pointer;
+    transition: background-color var(--transition-speed) var(--transition-ease);
+  }
+
+  .filters button.active {
+    background-color: var(--button-block-color); /* Active filter button color */
+    color: var(--text-color-dark); /* Text color for active filter button */
+  }
+
+  /* --- 8. Media Queries for Responsiveness --- */
+
+  @media (max-width: 768px) { /* Mobile Styles */
+    .App-header {
+      flex-direction: column; /* Stack header items */
+      align-items: center;
+      height: auto;
+    }
+    .main-navigation{
+      display: none;
+    }
+    .mobile-menu-toggle {
+      display: block; /* Show burger icon on mobile */
+    }
+  }
+
+  @media (min-width: 769px) { /* Desktop Styles */
+    .App-header {
+      flex-direction: row; /* Arrange header items in a row */
+      justify-content: space-between; /* Space out logo and nav */
+    }
+
+    .mobile-menu-toggle {
+      display: none; /* Hide burger icon on desktop */
+    }
+    .mobile-nav {
+      display: none !important; /* Ensure mobile nav is hidden on desktop */
+    }
+  }

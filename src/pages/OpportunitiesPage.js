@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { collection, query, orderBy, getDocs, where } from 'firebase/firestore';
 import { db } from '../utils/firebaseConfig'; 
 import './OpportunitiesPage.css';
+import Pagination from '@mui/material/Pagination';
 
 
 const TYPE_MAPPINGS = {
@@ -83,7 +84,7 @@ function OpportunitiesPage() {
     if (loading) {
         return (
             <div className="opportunities-page-container">
-                <h2>Все возможности</h2>
+                <h2>Выбирай. Действуй. Расти.</h2>
                 <p className="loading-message">Загрузка возможностей...</p>
             </div>
         );
@@ -92,7 +93,7 @@ function OpportunitiesPage() {
     if (error) {
         return (
             <div className="opportunities-page-container">
-                <h2>Все возможности</h2>
+                <h2>Выбирай. Действуй. Расти.</h2>
                 <p className="error-message">{error}</p>
             </div>
         );
@@ -100,7 +101,7 @@ function OpportunitiesPage() {
 
     return (
         <div className="opportunities-page-container">
-            <h2>Все возможности</h2>
+            <h2>Выбирай. Действуй. Расти.</h2>
 
             <div className="filter-sort-controls">
                 <div className="filter-controls">

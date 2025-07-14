@@ -2,16 +2,19 @@
 
 /* --- 1. Контейнер страницы и заголовок --- */
 .opportunities-page-container {
-    padding: var(--spacing-lg) var(--spacing-md); /* Отступы: 30px 20px -> lg md */
-    max-width: 1200px;
+    /* ИСПРАВЛЕНО: Добавлен padding для контейнера, так как margin: 0 0; убирает его */
+    padding: var(--spacing-lg) var(--spacing-md); 
+    max-width: 1400px; /* Максимальная ширина для контента страницы */
     margin: 0 auto; /* Центрируем контейнер */
 }
 
 .opportunities-page-container h2 {
     text-align: center;
+    font-family: var(--font-bad-script); /* Убедитесь, что --font-bad-script определен в variables.css */
+    font-weight: 700;
     margin-bottom: var(--spacing-xl); /* Отступ снизу: 40px -> xl */
     color: var(--text-color-dark); /* Используем темный цвет текста */
-    font-size: 2.5em; /* Можно создать переменную --font-size-page-heading */
+    font-size: 3.5em; /* Можно создать переменную --font-size-page-heading */
 }
 
 /* --- 2. Элементы управления (Фильтр и Сортировка) --- */
@@ -47,8 +50,7 @@
     color: var(--text-color-dark); /* Цвет текста в селектах */
     cursor: pointer;
     outline: none;
-    transition: border-color var(--transition-speed) var(--transition-ease),
-                box-shadow var(--transition-speed) var(--transition-ease);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .filter-select:hover,
@@ -58,27 +60,34 @@
 
 .filter-select:focus,
 .sort-select:focus {
-    border-color: var(--primary-color); /* Цвет границы при фокусе */
-    box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb, 0, 123, 255), .25); /* Примечание: --primary-rgb должна быть определена в формате "R, G, B" */
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb, 0, 123, 255), 0.25); /* Примечание: --primary-color-rgb должна быть определена в формате "R, G, B" */
 }
 
 /* --- 3. Сетка возможностей --- */
 .opportunities-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Адаптивная сетка */
+    grid-template-columns: repeat(3, 1fr); /* 3 колонки, каждая занимает равную долю */
     gap: var(--spacing-lg); /* Отступы между карточками: 25px -> lg */
+    justify-items: center; /* Центрируем карточки внутри ячеек сетки */
+    align-items: start; /* Выравниваем карточки по верху в ячейках */
 }
 
-/* --- 4. Карточки возможностей --- */
+/* --- 4. Карточки возможностей (стили из .training-card) --- */
 .opportunity-card {
-    background-color: var(--background-card); /* Фон карточки: #ffffff -> background-card */
-    border-radius: var(--border-radius-sm); /* Радиус скругления: 10px -> sm */
-    box-shadow: 0 4px 15px var(--shadow-color); /* Тень: rgba(0, 0, 0, 0.1) -> shadow-color */
-    overflow: hidden; /* Обрезаем, чтобы изображение не выходило за рамки */
+    
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    transition: transform var(--transition-speed) var(--transition-ease),
-                box-shadow var(--transition-speed) var(--transition-ease);
+    padding: 32px 32px 52px; /* Применяем padding из .training-card */
+    background: #fff; /* Применяем background из .training-card */
+    border-radius: 24px; /* Применяем border-radius из .training-card */
+    box-shadow: 0 30px 45px rgba(58,73,209,.1); /* Применяем boxShadow из .training-card */
+
+    /* Сохраняем эти стили, так как они не конфликтуют и важны для адаптивности/интерактивности */
+    max-width: 345px; 
+    width: 100%; 
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .opportunity-card:hover {
@@ -86,72 +95,14 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Чуть более выраженная тень при наведении */
 }
 
-.opportunity-card-image {
-    width: 100%;
-    height: 200px; /* Фиксированная высота для изображений */
-    object-fit: cover; /* Изображение будет обрезаться, чтобы заполнить контейнер */
-    display: block;
-}
-
-.card-content {
-    padding: var(--spacing-md); /* Отступ внутри карточки: 20px -> md */
-    flex-grow: 1; /* Контентная часть будет занимать оставшееся пространство */
-    display: flex;
-    flex-direction: column;
-}
-
-.card-content h3 {
-    font-size: 1.5em; /* Можно создать переменную --font-size-card-title */
-    color: var(--primary-color); /* Цвет заголовка карточки */
-    margin-top: 0;
-    margin-bottom: var(--spacing-sm); /* Отступ снизу: 10px -> sm */
-    min-height: 2.5em; /* Минимальная высота для заголовка */
-    line-height: 1.2;
-}
-
-.card-type,
-.card-category,
-.card-organizer,
-.card-deadline {
-    font-size: 0.9em; /* Можно создать переменную --font-size-card-meta */
-    color: var(--text-color-muted); /* Приглушенный цвет текста */
-    margin-bottom: 5px;
-}
-
-.card-description {
-    font-size: 1em; /* Можно создать переменную --font-size-card-description */
-    color: var(--text-color-dark); /* Цвет описания */
-    margin-top: var(--spacing-sm); /* Отступ сверху: 15px -> sm */
-    margin-bottom: var(--spacing-md); /* Отступ снизу: 20px -> md */
-    line-height: 1.5;
-    /* Ограничение по количеству строк */
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* Ограничиваем 3 строками */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.opportunity-card .btn-primary {
-    margin-top: auto; /* Прижимает кнопку к низу карточки */
-    display: block; /* Кнопка на всю ширину карточки */
-    background-color: var(--button-block-color); /* Цвет кнопки: #007bff -> button-block-color */
-    color: var(--text-color-dark); /* Цвет текста на кнопке */
-    padding: var(--spacing-sm) 15px; /* Отступы: 10px 15px -> sm 15px */
-    text-align: center;
-    text-decoration: none;
-    font-size: 1em;
-    border-radius: var(--border-radius-sm); /* Радиус скругления */
-    transition: background-color var(--transition-speed) var(--transition-ease),
-                transform var(--transition-speed) var(--transition-ease),
-                box-shadow var(--transition-speed) var(--transition-ease);
-}
-
-.opportunity-card .btn-primary:hover {
-    background-color: var(--primary-dark-color); /* Темный оттенок при наведении */
-    transform: translateY(-2px); /* Легкий подъем */
-    box-shadow: 0 4px 10px var(--primary-shadow-color); /* Тень */
-}
+/* УДАЛЕНЫ старые стили, которые теперь не нужны, так как они управляются MUI или новым дизайном */
+/* .opportunity-card-image { ... } */
+/* .card-content { ... } */
+/* .card-content h3 { ... } */
+/* .card-type, .card-category, .card-organizer, .card-deadline { ... } */
+/* .card-description { ... } */
+/* .opportunity-card .btn-primary { ... } */
+/* .opportunity-card .btn-primary:hover { ... } */
 
 
 /* --- 5. Сообщения о состоянии --- */
@@ -170,7 +121,14 @@
 }
 
 /* --- 6. Медиа-запросы для адаптивности --- */
-@media (max-width: 768px) {
+
+@media (max-width: 1024px) { /* Для планшетов и средних экранов */
+    .opportunities-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 колонки */
+    }
+}
+
+@media (max-width: 768px) { /* Mobile Styles */
     .opportunities-grid {
         grid-template-columns: 1fr; /* Одна колонка на мобильных */
     }
