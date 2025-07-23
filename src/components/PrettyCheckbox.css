@@ -1,0 +1,63 @@
+
+/* Base Pretty Checkbox styles */
+.pretty {
+  position: relative;
+  margin: 0.5em;
+  white-space: nowrap;
+  line-height: 1.5;
+  background: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+  border-radius: 8px;
+}
+
+.pretty input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.pretty .state {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.pretty .state label {
+  font-family: 'Caveat', cursive;
+  font-size: 20px;
+  color: #333;
+  padding-left: 2em;
+  user-select: none;
+}
+
+.pretty .state .icon {
+  position: absolute;
+  left: 0;
+  width: 1.5em;
+  height: 1.5em;
+  border: 3px solid #333; /* p-thick */
+  border-radius: 0.5em; /* p-curve */
+  background: rgba(255, 255, 255, 0.9);
+  transition: all 0.2s ease-in-out; /* p-smooth */
+}
+
+.pretty input:checked ~ .state .icon {
+  background: #3fbaff; /* Match accordion active color */
+  border-color: #333;
+}
+
+.pretty input:checked ~ .state .icon::before {
+  font-family: 'Material Design Icons';
+  color: white;
+  position: absolute;
+  font-size: 1em;
+  line-height: 1.5em;
+  text-align: center;
+  width: 100%;
+}
+
+.pretty.filterInactive input:not(:checked) ~ .state .icon {
+  opacity: 0.5;
+}

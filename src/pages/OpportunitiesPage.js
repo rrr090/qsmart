@@ -1,6 +1,10 @@
+// src/pages/OpportunitiesPage.js
+
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { collection, query, orderBy, getDocs, where } from 'firebase/firestore';
 import { db } from '../utils/firebaseConfig'; 
+import OpportunityCard from '../components/OpportunityCard';
 import './OpportunitiesPage.css';
 import Pagination from '@mui/material/Pagination';
 
@@ -15,14 +19,32 @@ const TYPE_MAPPINGS = {
     'Мероприятие': ['Мероприятие', 'Event'],
 };
 
-const FILTER_DISPLAY_TYPES = ['Все', ...Object.keys(TYPE_MAPPINGS)];
+// ОБНОВЛЕНО: Используем короткие значения тегов из SideNav в качестве ключей
+// Маппинг теперь включает как полные названия, так и короткие коды для гибкости запроса Firestore
+const CATEGORY_MAPPINGS = {
+    'math': ['Математика', 'Mathematics', 'math'], // Добавлен 'math'
+    'it': ['IT', 'Information Technology', 'it'],   // Добавлен 'it'
+    'phys': ['Физика', 'Physics', 'phys'],         // Добавлен 'phys'
+    'chem': ['Химия', 'Chemistry', 'chem'],         // Добавлен 'chem'
+    'bio': ['Биология', 'Biology', 'bio'],         // Добавлен 'bio'
+    'hist': ['История', 'History', 'hist'],         // Добавлен 'hist'
+    'art': ['Искусство', 'Art', 'art'],             // Добавлен 'art'
+    'sport': ['Спорт', 'Sport', 'sport'],         // Добавлен 'sport'
+    'lang': ['Языки', 'Languages', 'lang'],         // Добавлен 'lang'
+};
+
 
 function OpportunitiesPage() {
     const [opportunities, setOpportunities] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [sortOption, setSortOption] = useState('createdAt_desc');
-    const [filterType, setFilterType] = useState('Все');
+    
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    // Получаем текущие фильтры и сортировку из URL
+    const currentTypes = searchParams.get('type');
+    const currentCategories = searchParams.get('category');
+    const currentSort = searchParams.get('sort') || 'createdAt_desc'; // Дефолтная сортировка
 
     useEffect(() => {
         const fetchOpportunities = async () => {
@@ -31,16 +53,47 @@ function OpportunitiesPage() {
                 const opportunitiesRef = collection(db, 'opportunities');
                 let q = opportunitiesRef;
 
-                
-                if (filterType !== 'Все') {
-                    const possibleTypeValues = TYPE_MAPPINGS[filterType];
-                    if (possibleTypeValues && possibleTypeValues.length > 0) {
-                        q = query(q, where('type', 'in', possibleTypeValues));
+                // Применяем фильтр по типу (множественный выбор)
+                if (currentTypes) {
+                    const selectedTypes = currentTypes.split(',');
+                    let allPossibleTypeValues = [];
+                    selectedTypes.forEach(type => {
+                        if (TYPE_MAPPINGS[type]) {
+                            allPossibleTypeValues = allPossibleTypeValues.concat(TYPE_MAPPINGS[type]);
+                        }
+                    });
+                    if (allPossibleTypeValues.length > 0) {
+                        if (allPossibleTypeValues.length <= 10) {
+                            q = query(q, where('type', 'in', allPossibleTypeValues));
+                        } else {
+                            console.warn("Too many type filters for 'in' query. Max 10 values supported.");
+                            q = query(q, where('type', 'in', allPossibleTypeValues.slice(0, 10)));
+                        }
                     }
                 }
 
-                
-                switch (sortOption) {
+                // Применяем фильтр по категории (множественный выбор)
+                if (currentCategories) {
+                    const selectedCategories = currentCategories.split(',');
+                    let allPossibleCategoryValues = [];
+                    selectedCategories.forEach(category => {
+                        // ОБНОВЛЕНО: Теперь CATEGORY_MAPPINGS использует короткие значения тегов в качестве ключей
+                        if (CATEGORY_MAPPINGS[category]) {
+                            allPossibleCategoryValues = allPossibleCategoryValues.concat(CATEGORY_MAPPINGS[category]);
+                        }
+                    });
+                    if (allPossibleCategoryValues.length > 0) {
+                        if (allPossibleCategoryValues.length <= 10) {
+                            q = query(q, where('category', 'in', allPossibleCategoryValues));
+                        } else {
+                            console.warn("Too many category filters for 'in' query. Max 10 values supported.");
+                            q = query(q, where('category', 'in', allPossibleCategoryValues.slice(0, 10)));
+                        }
+                    }
+                }
+
+                // Применяем сортировку
+                switch (currentSort) {
                     case 'createdAt_asc':
                         q = query(q, orderBy('createdAt', 'asc'));
                         break;
@@ -72,18 +125,11 @@ function OpportunitiesPage() {
         };
 
         fetchOpportunities();
-    }, [sortOption, filterType]); 
-    const handleSortChange = (e) => {
-        setSortOption(e.target.value);
-    };
-
-    const handleFilterChange = (e) => {
-        setFilterType(e.target.value);
-    };
+    }, [currentTypes, currentCategories, currentSort]); // Зависимости: текущие значения фильтров и сортировки из URL
 
     if (loading) {
         return (
-            <div className="opportunities-page-container">
+            <div className="opportunities-content-inner">
                 <h2>Выбирай. Действуй. Расти.</h2>
                 <p className="loading-message">Загрузка возможностей...</p>
             </div>
@@ -92,7 +138,7 @@ function OpportunitiesPage() {
 
     if (error) {
         return (
-            <div className="opportunities-page-container">
+            <div className="opportunities-content-inner">
                 <h2>Выбирай. Действуй. Расти.</h2>
                 <p className="error-message">{error}</p>
             </div>
@@ -100,63 +146,18 @@ function OpportunitiesPage() {
     }
 
     return (
-        <div className="opportunities-page-container">
-            <h2>Выбирай. Действуй. Расти.</h2>
-
-            <div className="filter-sort-controls">
-                <div className="filter-controls">
-                    <label htmlFor="filter-by">Тип:</label>
-                    <select id="filter-by" value={filterType} onChange={handleFilterChange} className="filter-select">
-                        {/* Используем фиксированный список типов для отображения */}
-                        {FILTER_DISPLAY_TYPES.map(type => (
-                            <option key={type} value={type}>{type}</option>
-                        ))}
-                    </select>
-                </div>
-
-                <div className="sort-controls">
-                    <label htmlFor="sort-by">Сортировать по:</label>
-                    <select id="sort-by" value={sortOption} onChange={handleSortChange} className="sort-select">
-                        <option value="createdAt_desc">Дате публикации (новые)</option>
-                        <option value="createdAt_asc">Дате публикации (старые)</option>
-                        <option value="deadline_asc">Дедлайну (ближайшие)</option>
-                        <option value="deadline_desc">Дедлайну (дальние)</option>
-                    </select>
-                </div>
-            </div>
-
+        <div className="opportunities-content-inner">
+            
             {opportunities.length === 0 ? (
                 <p className="no-opportunities-message">К сожалению, пока нет доступных возможностей, соответствующих вашему запросу.</p>
             ) : (
                 <div className="opportunities-grid">
                     {opportunities.map(opportunity => (
-                        <div key={opportunity.id} className="opportunity-card">
-                            {opportunity.imageUrl && (
-                                <img src={opportunity.imageUrl} alt={opportunity.title} className="opportunity-card-image" />
-                            )}
-                            <div className="card-content">
-                                <h3>{opportunity.title}</h3>
-                                <p className="card-type">Тип: {opportunity.type}</p> 
-                                <p className="card-category">Категория: {opportunity.category}</p>
-                                <p className="card-organizer">Организатор: {opportunity.organizer}</p>
-                                <p className="card-description">{opportunity.description}</p>
-                                <p className="card-deadline">
-                                    Дедлайн: {opportunity.deadline?.toDate().toLocaleDateString('ru-RU', {
-                                        year: 'numeric',
-                                        month: 'long',
-                                        day: 'numeric',
-                                        hour: '2-digit',
-                                        minute: '2-digit'
-                                    }) || 'Не указан'}
-                                </p>
-                                <a href={opportunity.link} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                                    Подробнее
-                                </a>
-                            </div>
-                        </div>
+                        <OpportunityCard key={opportunity.id} opportunity={opportunity} />
                     ))}
                 </div>
             )}
+
         </div>
     );
 }

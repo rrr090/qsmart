@@ -8,17 +8,26 @@
   --button-block-color: #b4dfe5; /* Цвет кнопок и блоков с разделами */
   --header-top-color: #d2fdff; /* Цвет верхней части страницы (header) */
 
-  /* --- General UI Colors  --- */
+  /* --- General UI Colors (based on your selection) --- */
   --primary-color: var(--button-block-color); /* Используем цвет кнопок как основной */
   --primary-dark-color: #8db5ba; /* Более темный оттенок для hover/active, подбираем к button-block-color */
   --text-on-primary: var(--text-color-dark); /* Цвет текста на кнопках/блоках */
+  --text-color-light: #ffffff; /* Добавлен светлый цвет текста */
   --border-color: #e0e0e0; /* Общий цвет границ */
+  --primary-shadow-color: rgba(0, 123, 255, 0.3); /* Тень для основного цвета */
+  --primary-color-rgb: 0, 123, 255; /* RGB значения основного цвета для box-shadow */
+  --secondary-color: #6c757d; /* Вторичный цвет, например, для кнопки отмены */
+  --danger-color: #dc3545; /* Цвет для ошибок/опасных действий */
+  --accent-color: #28a745; /* Акцентный цвет, например, для сообщений об успехе */
 
-  /* --- Other common variables  --- */
-  --font-family-primary: 'Noto Serif', sans-serif; 
-  --font-bad-script: "Bad Script", cursive;
-  --font-pacifico: "Pacifico", cursive;
+
+  /* --- Fonts --- */
+  --font-family-primary: 'Noto Serif', serif;
   --font-size-base: 16px;
+  --font-size-large: 1.25rem;
+  --font-size-small: 0.875rem;
+  --font-bad-script: 'Bad Script', cursive; /* Для заголовков лендинга */
+  --font-pacific: 'Pacifico', cursive; /* Для логотипа */
 
 
   /* --- Отступы/Размеры --- */
@@ -30,16 +39,15 @@
 
   --border-radius-sm: 5px;
   --border-radius-md: 10px;
-  --border-radius-lg: 30px; 
+  --border-radius-lg: 30px; /* Как у вас для кнопок */
 
   /* --- Переходы --- */
   --transition-speed-fast: 0.2s;
-  --transition-speed: 0.3s;
+  --transition-speed-normal: 0.3s;
   --transition-speed-slow: 0.5s;
   --transition-ease: ease;
 
-  /* --- НОВЫЕ ПЕРЕМЕННЫЕ ДЛЯ ФИКСИРОВАННЫХ ВЫСОТ --- */
+  /* --- ПЕРЕМЕННЫЕ ДЛЯ ФИКСИРОВАННЫХ ВЫСОТ --- */
   --header-fixed-height: 80px; /* Фиксированная высота для хедера */
-  --nav-fixed-height: 60px;    /* Фиксированная высота для основной навигации */
   --footer-fixed-height: 60px; /* Фиксированная высота для футера */
-  }
+}

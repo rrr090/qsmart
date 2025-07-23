@@ -1,39 +1,54 @@
-// src/pages/HomePage.js
+// src/pages/HomePage.js (Теперь это Landing Page)
 import React from 'react';
-import { Link } from 'react-router-dom'; // Импортируем Link для навигации
-import './HomePage.css'; // Импортируем стили для домашней страницы
+import { useNavigate } from 'react-router-dom';
+import './HomePage.css'; // Создадим этот файл для стилей лендинга
 
 function HomePage() {
+    const navigate = useNavigate();
+
+    const handleExploreClick = () => {
+        navigate('/opportunities'); // Переход на страницу возможностей
+    };
+
     return (
-        <div className="home-page-container">
-            {/* Главная секция-герой с основным заголовком */}
-            <section className="main-hero-section">
-                <h1>Хочешь участвовать в хакатонах, конкурсах и проектах?</h1>
+        <div className="landing-page">
+            <div className="landing-hero">
+                <div className="hero-content">
+                    <h1>Откройте свой потенциал с Qsmart</h1>
+                    <p>
+                        Ваш путь к новым возможностям в образовании, науке и творчестве.
+                        Найдите идеальные олимпиады, конкурсы и кружки для школьников.
+                    </p>
+                    <button className="explore-button" onClick={handleExploreClick}>
+                        Найти возможности
+                    </button>
+                </div>
+            </div>
+
+            <section className="landing-features">
+                <h2>Почему Qsmart?</h2>
+                <div className="features-grid">
+                    <div className="feature-item">
+                        <h3>Широкий выбор</h3>
+                        <p>Тысячи возможностей от ведущих организаций и университетов.</p>
+                    </div>
+                    <div className="feature-item">
+                        <h3>Персонализация</h3>
+                        <p>Найдите то, что подходит именно вам, с помощью умных фильтров.</p>
+                    </div>
+                    <div className="feature-item">
+                        <h3>Легкий доступ</h3>
+                        <p>Вся информация в одном месте, всегда под рукой.</p>
+                    </div>
+                </div>
             </section>
 
-            {/* --- НОВАЯ СЕКЦИЯ: 4-х квадрантная галерея --- */}
-            <section className="quadrant-gallery-section">
-                {/* 1-й квадрант: Текст */}
-                <div className="quadrant-item">
-                    <h2>Здесь ты найдешь всё, что поможет развить свои идеи, получить опыт и начать путь к большим достижениям.</h2>
-                <Link to="/about" className="btn primary-btn">Принять участие</Link>
-                </div>
-
-                {/* 2-й квадрант: Изображение */}
-                <div className="quadrant-item image-quadrant">
-                    <img src="https://placehold.co/400x300/b4dfe5/303c6c?text=Изображение+1" alt="Изображение возможностей" />
-                </div>
-
-                {/* 3-й квадрант: Текст */}
-                <div className="quadrant-item image-quadrant">
-                    <img src="https://placehold.co/400x300/d2fdff/303c6c?text=Изображение+2" alt="Изображение успеха" />
-                </div>
-
-                {/* 4-й квадрант: Изображение */}
-                <div className="quadrant-item">
-                    <h2>Развивай ум — используй возможности! Находи конкурсы, участвуй в хакатонах, меняй будущее. Qsmart — твоя площадка для роста.</h2>
-                    <Link to="/opportunities" className="btn secondary-btn">Найти конкурс</Link>
-                </div>
+            <section className="landing-cta">
+                <h2>Готовы начать?</h2>
+                <p>Не упустите свой шанс на успех. Присоединяйтесь к Qsmart сегодня!</p>
+                <button className="cta-button" onClick={handleExploreClick}>
+                    Начать поиск
+                </button>
             </section>
         </div>
     );

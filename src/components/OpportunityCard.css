@@ -1,0 +1,234 @@
+/* src/components/OpportunityCard.css */
+
+.opportunity-card {
+
+
+    left: 0px;
+    top: 0px;
+    height: 340px;
+    width: 100%;
+    
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-md); /* Отступы внутри карточки */
+    background: var(--background-card); /* Белый фон */
+    border-radius: var(--border-radius-md); /* Скругление углов */
+    box-shadow: 0 4px 15px var(--shadow-color); /* Мягкая тень */
+
+    box-sizing: border-box; /* Учитываем padding в высоте */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    width: 100%; /* Занимает всю ширину родительского контейнера */
+}
+
+.opportunity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Заголовок карточки --- */
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.card-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--button-block-color);
+    color: var(--text-color-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    flex-shrink: 0; /* Не сжимать аватар */
+}
+
+.header-content {
+    flex-grow: 1;
+}
+
+.card-title {
+    font-size: 1.4em;
+    color: var(--primary-color);
+    font-weight: bold;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.card-organizer {
+    font-size: 0.9em;
+    color: var(--text-color-muted);
+    margin: 0;
+}
+
+/* --- Изображение карточки --- */
+.card-media img {
+    width: 100%;
+    height: 180px; /* Фиксированная высота для изображений */
+    object-fit: cover; /* Обрезает изображение, чтобы оно заполнило контейнер */
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+/* --- Основное содержимое карточки --- */
+.card-content {
+    flex-grow: 1; /* Позволяет контенту занимать доступное пространство */
+    margin-bottom: var(--spacing-md);
+}
+
+.card-description {
+    font-size: 0.95em;
+    color: var(--text-color-dark);
+    line-height: 1.5;
+    /* Ограничение по количеству строк */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Ограничиваем 3 строками */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: var(--spacing-sm);
+}
+
+.card-deadline {
+    font-size: 0.9em;
+    color: var(--danger-color);
+    font-weight: bold;
+    margin-top: var(--spacing-sm);
+}
+
+/* --- Стили для тегов (категория, тип) --- */
+.opportunity-tag-container {
+    display: flex;
+    flex-wrap: wrap; /* Разрешает перенос тегов на новую строку */
+    gap: var(--spacing-xs); /* Отступ между тегами */
+    margin-top: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.opportunity-tag {
+    background-color: var(--button-block-color); /* Фон тега */
+    color: var(--text-color-dark); /* Цвет текста тега */
+    padding: 4px 8px; /* Отступы внутри тега */
+    border-radius: var(--border-radius-sm); /* Скругление углов тега */
+    font-size: 0.8em;
+    font-weight: 600;
+    white-space: nowrap; /* Предотвращает перенос текста внутри тега */
+}
+
+/* --- Панель действий --- */
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color); /* Разделитель */
+    margin-top: auto; /* Прижимает действия к низу карточки */
+}
+
+.btn-primary-card {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--text-color-dark);
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.9em;
+    border-radius: var(--border-radius-sm);
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary-card:hover {
+    background-color: var(--primary-dark-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(var(--primary-color-rgb), 0.2);
+}
+
+/* --- Кнопка "Показать больше" --- */
+.expand-button {
+    background: none;
+    border: none;
+    color: var(--text-color-muted);
+    cursor: pointer;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.2s ease;
+}
+
+.expand-button:hover {
+    color: var(--primary-color);
+}
+
+.expand-button .expand-icon {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--text-color-muted); /* Стрелка вниз */
+    transition: transform 0.2s ease, border-top-color 0.2s ease;
+}
+
+.expand-button.expanded .expand-icon {
+    transform: rotate(180deg); /* Поворот стрелки вверх */
+    border-top-color: var(--primary-color);
+}
+
+/* --- Коллапсируемый блок --- */
+.card-collapse {
+    max-height: 0; /* Изначально скрыто */
+    overflow: hidden;
+    transition: max-height 0.3s ease-out; /* Плавное раскрытие/скрытие */
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.card-collapse.show {
+    max-height: 500px; /* Достаточно большая высота для контента, можно настроить */
+    padding-top: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+}
+
+.card-body {
+    padding: 0; /* Убираем внутренний padding, так как он уже есть в card-collapse */
+    color: var(--text-color-dark);
+    font-size: 0.9em;
+    line-height: 1.6;
+}
+
+/* Медиа-запросы для адаптивности */
+@media (max-width: 768px) {
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .header-content {
+        text-align: left;
+    }
+    .card-title {
+        font-size: 1.2em;
+    }
+    .card-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .btn-primary-card,
+    .expand-button {
+        width: 100%;
+        text-align: center;
+        margin-bottom: var(--spacing-sm);
+    }
+    .expand-button {
+        justify-content: center;
+    }
+}

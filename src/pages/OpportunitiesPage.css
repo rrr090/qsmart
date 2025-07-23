@@ -1,108 +1,80 @@
 /* src/pages/OpportunitiesPage.css */
 
-/* --- 1. Контейнер страницы и заголовок --- */
-.opportunities-page-container {
-    /* ИСПРАВЛЕНО: Добавлен padding для контейнера, так как margin: 0 0; убирает его */
-    padding: var(--spacing-lg) var(--spacing-md); 
-    max-width: 1400px; /* Максимальная ширина для контента страницы */
-    margin: 0 auto; /* Центрируем контейнер */
-}
-
-.opportunities-page-container h2 {
-    text-align: center;
-    font-family: var(--font-bad-script); /* Убедитесь, что --font-bad-script определен в variables.css */
-    font-weight: 700;
-    margin-bottom: var(--spacing-xl); /* Отступ снизу: 40px -> xl */
-    color: var(--text-color-dark); /* Используем темный цвет текста */
-    font-size: 3.5em; /* Можно создать переменную --font-size-page-heading */
-}
-
-/* --- 2. Элементы управления (Фильтр и Сортировка) --- */
-.filter-sort-controls {
-    display: flex;
-    justify-content: space-between; /* Размещаем фильтр и сортировку по краям */
-    align-items: center;
-    margin-bottom: var(--spacing-lg); /* Отступ снизу: 30px -> lg */
-    gap: var(--spacing-md); /* Отступ между блоками: 20px -> md */
-}
-
-.filter-controls,
-.sort-controls {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm); /* Отступ между элементами управления: 10px -> sm */
-}
-
-.filter-controls label,
-.sort-controls label {
-    font-size: 1em;
-    color: var(--text-color-dark); /* Используем темный цвет текста */
-    font-weight: bold;
-}
-
-.filter-select,
-.sort-select {
-    padding: var(--spacing-sm) 15px; /* Отступы: 10px 15px -> sm 15px */
-    border: 1px solid var(--border-color); /* Цвет границы из переменных */
-    border-radius: var(--border-radius-sm); /* Радиус скругления из переменных */
-    background-color: var(--background-card); /* Фон для селектов: #ffffff -> background-card */
-    font-size: 1em;
-    color: var(--text-color-dark); /* Цвет текста в селектах */
-    cursor: pointer;
-    outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.filter-select:hover,
-.sort-select:hover {
-    border-color: var(--primary-dark-color); /* Цвет границы при наведении */
-}
-
-.filter-select:focus,
-.sort-select:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb, 0, 123, 255), 0.25); /* Примечание: --primary-color-rgb должна быть определена в формате "R, G, B" */
-}
-
-/* --- 3. Сетка возможностей --- */
-.opportunities-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 колонки, каждая занимает равную долю */
-    gap: var(--spacing-lg); /* Отступы между карточками: 25px -> lg */
-    justify-items: center; /* Центрируем карточки внутри ячеек сетки */
-    align-items: start; /* Выравниваем карточки по верху в ячейках */
-}
-
-/* --- 4. Карточки возможностей (стили из .training-card) --- */
-.opportunity-card {
-    
-    overflow: hidden;
+/* --- 1. Внутренний контейнер контента страницы --- */
+.opportunities-content-inner {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    padding: 32px 32px 52px; /* Применяем padding из .training-card */
-    background: #fff; /* Применяем background из .training-card */
-    border-radius: 24px; /* Применяем border-radius из .training-card */
-    box-shadow: 0 30px 45px rgba(58,73,209,.1); /* Применяем boxShadow из .training-card */
-
-    /* Сохраняем эти стили, так как они не конфликтуют и важны для адаптивности/интерактивности */
-    max-width: 345px; 
-    width: 100%; 
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    flex-grow: 1;
+    /* Добавляем min-height, чтобы flex-grow: 1 работал корректно,
+       особенно если контента очень мало. Это позволит grid занять
+       доступное пространство для прокрутки. */
+    min-height: 0; /* Важно для flex-контейнера, чтобы его дочерние элементы с flex-grow: 1 могли сжиматься */
 }
 
-.opportunity-card:hover {
-    transform: translateY(-5px); /* Легкий эффект поднятия */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Чуть более выраженная тень при наведении */
+.opportunities-content-inner h2 {
+    text-align: center;
+    font-family: var(--font-bad-script);
+    font-weight: 700;
+    margin-bottom: var(--spacing-xl);
+    color: var(--text-color-dark);
+    font-size: 3.5em;
 }
 
-/* УДАЛЕНЫ старые стили, которые теперь не нужны, так как они управляются MUI или новым дизайном */
-/* .opportunity-card-image { ... } */
-/* .card-content { ... } */
-/* .card-content h3 { ... } */
-/* .card-type, .card-category, .card-organizer, .card-deadline { ... } */
-/* .card-description { ... } */
-/* .opportunity-card .btn-primary { ... } */
-/* .opportunity-card .btn-primary:hover { ... } */
+
+/* --- 3. Сетка возможностей (ВЕРТИКАЛЬНАЯ ПРОКРУТКА) --- */
+.opportunities-grid {
+    
+    margin-top: 2.0408163265306123vh;
+    padding-left: 0 !important;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    width: 100%;
+
+    
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    justify-items: center;
+    align-items: start;
+    
+    /* КЛЮЧЕВЫЕ ИЗМЕНЕНИЯ ДЛЯ ВЕРТИКАЛЬНОЙ ПРОКРУТКИ */
+    flex-grow: 1; /* Позволяет сетке занимать оставшееся вертикальное пространство */
+    overflow-y: auto; /* Включает вертикальную прокрутку только для этого блока */
+    box-sizing: border-box; /* Учитывает padding в размере */
+    padding-right: var(--spacing-sm); /* Добавляем небольшой padding справа, чтобы полоса прокрутки не прилипала к краю */
+
+    /* Стилизация полосы прокрутки (Webkit browsers) */
+    &::-webkit-scrollbar {
+        width: 8px; /* Ширина вертикальной полосы прокрутки */
+    }
+    &::-webkit-scrollbar-track {
+        background: var(--background-main);
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background: var(--primary-dark-color);
+    }
+}
+
+
+.opportunities-page-wrapper {
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+}
+.opportunities-page-container{
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+}
 
 
 /* --- 5. Сообщения о состоянии --- */
@@ -110,54 +82,57 @@
 .error-message,
 .no-opportunities-message {
     text-align: center;
-    font-size: 1.2em; /* Можно создать переменную --font-size-message */
-    color: var(--text-color-muted); /* Приглушенный цвет текста */
-    margin-top: var(--spacing-xl); /* Отступ сверху: 50px -> xl */
+    font-size: 1.2em;
+    color: var(--text-color-muted);
+    margin-top: var(--spacing-xl);
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .error-message {
-    color: var(--danger-color); /* Цвет ошибки */
+    color: var(--danger-color);
     font-weight: bold;
 }
 
-/* --- 6. Медиа-запросы для адаптивности --- */
 
-@media (max-width: 1024px) { /* Для планшетов и средних экранов */
-    .opportunities-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 колонки */
+/* --- 7. Медиа-запросы для адаптивности --- */
+
+
+
+@media (max-width: 768px) {
+    .opportunities-content-inner {
+        padding: var(--spacing-md) var(--spacing-sm);
     }
-}
-
-@media (max-width: 768px) { /* Mobile Styles */
     .opportunities-grid {
         grid-template-columns: 1fr; /* Одна колонка на мобильных */
     }
-
-    .opportunities-page-container {
-        padding: var(--spacing-md) var(--spacing-sm); /* Уменьшаем отступы на мобильных */
+    .opportunities-grid .opportunity-card {
+        width: 100%; /* Карточка занимает всю ширину на мобильных */
     }
 
-    .opportunities-page-container h2 {
-        font-size: 2em; /* Меньший заголовок на мобильных */
-        margin-bottom: var(--spacing-lg); /* Отступ снизу: 30px -> lg */
+    .opportunities-content-inner h2 {
+        font-size: 2em;
+        margin-bottom: var(--spacing-lg);
     }
 
     .filter-sort-controls {
-        flex-direction: column; /* Размещаем фильтр и сортировку в столбец */
-        align-items: stretch; /* Растягиваем элементы на всю ширину */
-        gap: var(--spacing-sm); /* Отступ между блоками: 15px -> sm */
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--spacing-sm);
     }
 
     .filter-controls,
     .sort-controls {
-        justify-content: center; /* Центрируем на мобильных */
-        flex-direction: column; /* Элементы в столбец на мобильных */
-        gap: 5px; /* Маленький отступ внутри контролов */
+        justify-content: center;
+        flex-direction: column;
+        gap: 5px;
     }
 
     .filter-select,
     .sort-select {
-        width: 100%; /* Ширина на 100% на мобильных */
-        max-width: 300px; /* Ограничиваем максимальную ширину */
+        width: 100%;
+        max-width: 300px;
     }
 }

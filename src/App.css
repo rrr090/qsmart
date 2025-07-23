@@ -1,372 +1,332 @@
-  /* src/App.css */
+/* src/App.css */
 
-  /* --- 1. Variables Import --- */
-  @import './styles/variables.css';
-  @import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Pacifico&display=swap');
-  @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+/* --- 1. Импорт переменных --- */
+@import './styles/variables.css';
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
-  /* --- 2. Base Styles & Sticky Footer Setup --- */
-  /* Ensure html, body, and the root React element take full height */
-  html,
-  body,
-  #root {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
+/* --- 2. Базовые стили и настройка "липкого" футера --- */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
-  .App {
-    display: flex; /* Make the App container a Flexbox */
-    flex-direction: column; /* Stack children vertically */
-    min-height: 100vh; /* Ensure App takes at least full viewport height */
-    max-height: 100vh;
-    /* text-align: center; Keep this only if you need overall center alignment */
-  }
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-  body {
-    background-color: var(--background-main); /* Main page background */
-    color: var(--text-color-dark); /* Default text color */
-    font-family: var(--font-family-primary); /* Primary font family */
-    font-size: var(--font-size-base); /* Base font size */
-  }
+body {
+  background-color: var(--background-main);
+  color: var(--text-color-dark);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-base);
+}
 
-  a {
-    text-decoration: none; /* Remove underline from all links by default */
-    color: var(--text-color-dark); /* Default link color (can be overridden) */
-  }
+a {
+  text-decoration: none;
+  color: var(--text-color-dark);
+}
 
-  /* --- 3. Header Styles --- */
-  .App-header {
-    z-index: 100;
-    background-color: var(--header-top-color); /* Top part of the page */
-    height: var(--header-fixed-height);
-    display: flex;
-    flex-direction: column; /* Default for mobile: stack elements */
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin); 
-    color: var(--text-color-dark); /* Text color for header content */
-    padding: 0 var(--spacing-lg);
-    border-bottom: 3px solid var(--text-color-dark); /* Border color and thickness */
-    flex-shrink: 0; /* Prevent header from shrinking */
-  }
+/* --- 3. Стили хедера --- */
+.App-header {
+  background-color: var(--header-top-color);
+  height: var(--header-fixed-height);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: var(--text-color-dark);
+  padding: 0 var(--spacing-lg);
+  border-bottom: 3px solid var(--button-block-color);
+  flex-shrink: 0;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, border-bottom 0.3s ease;
+}
 
-  .header-content {
+/* Стили для хедера на лендинговой странице (прозрачный) */
+.App-header.landing-header {
+    background-color: transparent;
+    border-bottom: none;
+    position: absolute; /* Позиционируем поверх hero-секции */
+    top: 0;
+    left: 0;
     width: 100%;
-    display: flex;
-    margin-left: 50px;
-    justify-content: space-between;
-    align-items: center;
-  }
+    z-index: 10;
+    color: #fff; /* Белый текст для контраста с фоном */
+}
 
-  .site-logo {
-    font-family: var(--font-pacifico);
-    font-weight: 700;
-    font-style: normal;
-    color: var(--text-color-dark);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: all var(--transition-speed) var(--transition-ease);
-    cursor: pointer;
-    text-decoration: none;
-  }
+.App-header.landing-header .site-logo {
+    color: #fff;
+}
+.App-header.landing-header .mobile-menu-toggle {
+    color: #fff;
+}
 
-  .site-logo:hover {
-    color: var(--text-color-dark); /* Consider a darker shade for hover if text-color-dark is primary */
-    transform: scale(1.05);
-    text-shadow: 1px 1px 4px var(--shadow-color);
-  }
 
-  .App-logo {
-    height: 40vmin;
-    pointer-events: none;
-  }
+.header-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .App-link {
-    color: #61dafb; /* Keep specific link color if needed */
-  }
+.site-logo {
+  font-family: var(--font-pacific);
+  font-weight: 700;
+  font-style: normal;
+  color: var(--text-color-dark);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all var(--transition-speed-normal) var(--transition-ease);
+  cursor: pointer;
+  text-decoration: none;
+}
 
-  /* --- 4. Main Content Styles --- */
-  /* --- 4.1 Main Navigation  --- */
-  .main-navigation {
-    flex-shrink: 0;
-    height: var(--nav-fixed-height);
-    width: fit-content; /* Контейнер будет занимать только необходимую ширину своего содержимого */
-    margin-left: 20px; 
-  }
+.site-logo:hover {
+  color: var(--primary-dark-color);
+  transform: scale(1.05);
+  text-shadow: 1px 1px 4px var(--shadow-color);
+}
 
-  .desktop-nav-list {  
-    position: relative;
-    list-style: none;
-    display: flex;
-    opacity: 1;
-    transform: translateY(-56px);
-    visibility: visible;
-    transition: all 0.7s ease;
-    z-index: 0; 
-    gap: var(--spacing-sm); 
-    margin: 0; 
-    padding: 0;
-  }
-  
-  .main-navigation:hover .desktop-nav-list{
-    opacity: 1;
-    z-index: 2;
-    visibility: visible;
-    transform: translateY(-2px);
-    display:flex
-  }
+/* --- 4. КОНТЕЙНЕР ДЛЯ САЙДБАРА И ОСНОВНОГО КОНТЕНТА --- */
+/* Изменен класс на flexcontainerMain */
+.flexcontainerMain {
+  display: flex;
+  justify-content: space-between;
 
-  .desktop-nav-list li {
-    background-color: var(--button-block-color); 
-    border: 3px solid var(--text-color-dark); /* ДОБАВЛЯЕМ ГРАНИЦУ КНОПКАМ */
-    transition: all var(--transition-speed) var(--transition-ease);
-    transform: translateY(-3px);
-  }
+}
 
-  .desktop-nav-list li button { /* Стили для кнопки "Выйти" */
-    background-color: var(--button-block-color); 
-    display: block;
-    text-decoration: none;
-    color: var(--text-color-dark); /* Цвет текста на кнопках */
-    font-weight: 500;
-    font-family: var(--font-family-primary);
-    font-size: var(--font-size-base); /* Base font size */
-    cursor: pointer;
-    border: none;
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
-  }
+/* Отступ сверху для flexcontainerMain, когда хедер отсутствует (для внутренних страниц) */
+.flexcontainerMain:not(.landing-body-content) {
 
-  .desktop-nav-list li button:hover{
-    background-color: var(--header-top-color);
-    box-shadow: 0 6px 15px var(--primary-shadow-color);
-    color: var(--text-color-light); /* Светлый цвет текста для активной кнопки */
-    font-weight: bold;
-  }
+}
 
-  .desktop-nav-list li:hover,
-  .desktop-nav-list li.active,
-  .desktop-nav-list li:has(.nav-link.active) {
-    background-color: var(--header-top-color); /* Темнее при наведении/активности */
-    border-color: var(--text-color-dark); /* Изменяем цвет границы при наведении/активности */
-    box-shadow: 0 6px 15px var(--primary-shadow-color);
-    transform: translateY(0px);
-    
-  }
-  
 
-  /* NavLink common styles */
-  .nav-link {
-    display: block;
-    text-decoration: none;
-    color: var(--text-color-dark); /* Цвет текста на кнопках */
-    font-weight: 500;
-  }
+/* --- 5. Main content Styles (App-main) --- */
+/* App-main по умолчанию */
+.App-main {
+  flex-grow: 1; /* Позволяет App-main занимать все доступное пространство */
+  background-color: var(--background-main);
+  display: flex; /* Делаем App-main Flex-контейнером */
+  flex-direction: column; /* Элементы внутри будут располагаться в колонку */
+  justify-content: center; /* Центрируем содержимое по вертикали */
+  align-items: center; /* Центрируем содержимое по горизонтали */
+  box-sizing: border-box;
+  overflow-y: auto; /* Позволяет прокручиваться содержимому App-main */
+}
 
-  /* NavLink active styles */
-  .nav-link.active {
-    color: var(--text-color-light); /* Светлый цвет текста для активной кнопки */
-    font-weight: bold;
-  }
-
-  /* --- 4.2 Main content --- */
-  .App-main {
-    overflow-y: auto;
-    flex-grow: 1; /* Ключ для липкого футера: основной контент расширяется, чтобы заполнить пространство */
-    padding: var(--spacing-md); /* Добавьте консистентный отступ */
-    background-color: var(--background-main); 
+/* Стили для App-main, когда SideNav присутствует (пользовательский flexcontainer) */
+.App-main.content-with-sidenav {
     flex-direction: column; /* Элементы внутри будут располагаться в колонку */
-    justify-content: center; /* Центрируем содержимое по вертикали */
-    align-items: flex-start; 
-  }
-
-  /* --- 5. Footer Styles --- */
-  .App-footer {
-    border-top: 3px solid var(--text-color-dark); /* Граница сверху */
-    color: var(--text-color-dark); /* Цвет текста футера */
-    height: var(--footer-fixed-height);
-    padding: 0 var(--spacing-md); /* Отступы футера */
-    flex-shrink: 0; /* Предотвращает сжатие футера */
-    display: flex; 
-    justify-content: space-between;
-    align-items: center;
-    font-size: var(--font-size-base); 
-    background-color: var(--header-top-color); /* Добавим фон, чтобы футер был виден */
-  }
-
-  /* Стили для ссылок внутри футера */
-  .App-footer a {
-      color: var(--text-color-dark); /* Цвет ссылки */
-      text-decoration: none;
-      font-weight: bold;
-      transition: color var(--transition-speed) var(--transition-ease);
-  }
-
-  .App-footer a:hover {
-      color: var(--primary-dark-color); /* Цвет ссылки при наведении */
-      
-  }
-
-  .App-footer .footer-center {
-      align-items: center;
-      display: block;
-      margin-left: 50px;
-      margin-right: auto;
-      gap: 8px; /* Отступ между флагом и текстом */
-  }
-
-  .App-footer .footer-center span[role="img"] {
-      font-size: 1.2em; /* Размер флага */
-  }
-
-  /* Адаптация футера для мобильных */
-  @media (max-width: 768px) {
-      .App-footer {
-          text-align: center; /* Центрируем текст */
-          gap: var(--spacing-sm); /* Отступ между элементами */
-          padding: var(--spacing-md) var(--spacing-sm); /* Уменьшаем горизонтальный padding */
-      }
-
-      .App-footer .footer-left,
-      .App-footer .footer-center,
-      .App-footer .footer-right {
-          width: 100%; /* Занимают всю ширину */
-          text-align: center; /* Центрируем текст */
-      }
-  }
+    flex: 1 1 auto; /* Растягивается и сжимается */
+    padding-right: 50px; /* Пользовательский padding-right */
+    height: 100vh; /* **КЛЮЧЕВОЕ**: Занимает всю высоту родителя flexcontainerMain */
+    margin-left: 3px; /* Пользовательский margin-left */
+    overflow-y: auto; /* Прокрутка для этого контейнера */
+    background-color: var(--background-main); /* Убедитесь, что фон правильный */
+    box-sizing: border-box;
+}
 
 
-  /* --- 6. Navigation (Desktop & Mobile) Styles --- */
+/* --- 6. Футер --- */
+.App-footer {
+  border-top: 3px solid var(--text-color-dark);
+  color: var(--text-color-dark);
+  height: var(--footer-fixed-height);
+  padding: 0 var(--spacing-md);
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--font-size-base);
+  background-color: var(--header-top-color);
+  box-sizing: border-box;
+}
 
-  /* NavLink common styles */
-  .nav-link {
-    display: block;
-    padding: calc(2 * var(--spacing-sm)) calc(2 * var(--spacing-md));
+.App-footer a {
+    color: var(--text-color-dark);
     text-decoration: none;
-    color: var(--text-color-dark); /* Default text color for NavLinks */
-    font-weight: 500;
-    transition: all var(--transition-speed) var(--transition-ease);
-  }
-
-  /* NavLink active styles */
-  .nav-link.active {
-    color: rgb(56, 6, 97); /* Specific active color from your example */
     font-weight: bold;
-    /* Ensure active state also matches hover if desired, e.g.: */
-    /* background-color: var(--background-main); */
-    /* box-shadow: 0 6px 15px var(--primary-shadow-color); */
-  }
+    transition: color var(--transition-speed-normal) var(--transition-ease);
+}
 
+.App-footer a:hover {
+    color: var(--primary-dark-color);
+}
 
-  /* Mobile Menu Toggle (Hidden by default on desktop, shown on mobile) */
-  .mobile-menu-toggle {
+.App-footer .footer-center {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.App-footer .footer-center img.flag-icon {
+    width: 24px;
+    height: auto;
+    vertical-align: middle;
+    border-radius: 2px;
+    box-shadow: 0 0 3px rgba(0,0,0,0.2);
+}
+
+/* --- 7. Мобильная навигация и переключатель --- */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2em;
+  cursor: pointer;
+  color: var(--text-color-dark);
+  padding: 5px 10px;
+}
+
+.mobile-nav {
+  display: none;
+  width: 100%;
+  background-color: var(--header-top-color);
+  box-shadow: 0 2px 10px var(--shadow-color);
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  flex-direction: column;
+  transition: max-height var(--transition-speed-normal) var(--transition-ease), opacity var(--transition-speed-normal) var(--transition-ease);
+}
+
+.mobile-nav.open {
+  max-height: 300px;
+  opacity: 1;
+  display: flex;
+}
+
+.mobile-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: var(--spacing-md) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.mobile-nav li {
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-lg);
+  background-color: var(--button-block-color);
+  width: 80%;
+  text-align: center;
+}
+
+.mobile-nav li button {
     background: none;
     border: none;
-    font-size: 2em;
-    cursor: pointer;
-    color: var(--text-color-dark); /* Color of the burger icon */
-    padding: 5px 10px;
-  }
-
-  /* Mobile Navigation (Hidden by default, shown via JS 'open' class) */
-  .mobile-nav {
-    display: none; /* Hidden by default */
-    width: 100%;
-    background-color: var(--header-top-color); /* Mobile menu background */
-    box-shadow: 0 2px 10px var(--shadow-color);
-    overflow: hidden;
-    max-height: 0; /* For smooth transition */
-    opacity: 0; /* For smooth fade */
-    flex-direction: column; /* Stack items vertically */
-    transition: max-height var(--transition-speed) var(--transition-ease), opacity var(--transition-speed) var(--transition-ease);
-  }
-
-  .mobile-nav.open {
-    max-height: 300px; /* Sufficient height to reveal content */
-    opacity: 1; /* Fully visible */
-    display: flex; /* Show as flex container */
-  }
-
-  .mobile-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: var(--spacing-md) 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--spacing-sm);
-  }
-
-  .mobile-nav li {
-    padding: var(--spacing-sm);
-    border-radius: var(--border-radius-lg);
-    background-color: var(--button-block-color);
-    width: 80%;
-    text-align: center;
-  }
-
-  .mobile-nav .nav-link {
     color: var(--text-color-dark);
-    font-weight: 500;
-  }
-
-  .mobile-nav .nav-link.active {
-    color: rgb(56, 6, 97); /* Specific active color for mobile NavLink */
-  }
-
-
-  /* --- 7. Filters Section --- */
-  .filters {
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-lg);
-    flex-wrap: wrap;
-  }
-
-  .filters button {
-    padding: var(--spacing-sm) var(--spacing-md);
-    border: none;
-    border-radius: var(--border-radius-sm);
-    background-color: var(--background-main); /* Using main background for default button */
-    color: var(--text-color-dark); /* Text color for default button */
+    font-size: var(--font-size-base);
     cursor: pointer;
-    transition: background-color var(--transition-speed) var(--transition-ease);
+    padding: 0;
+}
+
+.mobile-nav .nav-link {
+  color: var(--text-color-dark);
+  font-weight: 500;
+}
+
+.mobile-nav .nav-link.active {
+  color: var(--text-color-light);
+}
+
+
+/* --- 8. Секция фильтров (если есть) --- */
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.filters button {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  background-color: var(--background-main);
+  color: var(--text-color-dark);
+  cursor: pointer;
+  transition: background-color var(--transition-speed-normal) var(--transition-ease);
+}
+
+.filters button.active {
+  background-color: var(--button-block-color);
+  color: var(--text-color-dark);
+}
+
+/* --- 9. Медиа-запросы для адаптивности --- */
+
+@media (max-width: 768px) { /* Мобильные стили */
+  .App-header {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: var(--spacing-sm) var(--spacing-md);
+    height: var(--header-fixed-height);
+  }
+  /* На мобильных flexcontainerMain будет в колонку, сайдбар скрыт */
+  .flexcontainerMain { /* Изменен класс на flexcontainerMain */
+      flex-direction: column;
+      padding-top: 0; /* Убираем padding-top, если хедер не прозрачный */
+  }
+  .sideNav {
+    display: none;
+  }
+  .mobile-menu-toggle {
+    display: block;
+  }
+  .App-footer {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-sm);
+    height: auto;
   }
 
-  .filters button.active {
-    background-color: var(--button-block-color); /* Active filter button color */
-    color: var(--text-color-dark); /* Text color for active filter button */
+  .App-footer .footer-left,
+  .App-footer .footer-center,
+  .App-footer .footer-right {
+      width: 100%;
+      text-align: center;
   }
 
-  /* --- 8. Media Queries for Responsiveness --- */
-
-  @media (max-width: 768px) { /* Mobile Styles */
-    .App-header {
-      flex-direction: column; /* Stack header items */
-      align-items: center;
-      height: auto;
-    }
-    .main-navigation{
-      display: none;
-    }
-    .mobile-menu-toggle {
-      display: block; /* Show burger icon on mobile */
-    }
+  /* На мобильных App-main не должен иметь sideNav-специфичных стилей */
+  .App-main.content-with-sidenav {
+      width: 100vh;
+      padding-right: var(--spacing-md); /* Стандартный padding */
+      margin-left: 0; /* Убрать margin-left */
+      height: auto; /* Автоматическая высота */
+      overflow-y: visible; /* Прокрутка будет на App-main по умолчанию */
   }
+}
 
-  @media (min-width: 769px) { /* Desktop Styles */
-    .App-header {
-      flex-direction: row; /* Arrange header items in a row */
-      justify-content: space-between; /* Space out logo and nav */
-    }
-
-    .mobile-menu-toggle {
-      display: none; /* Hide burger icon on desktop */
-    }
-    .mobile-nav {
-      display: none !important; /* Ensure mobile nav is hidden on desktop */
-    }
+@media (min-width: 769px) { /* Десктопные стили */
+  .App-header {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: var(--header-fixed-height);
   }
+  /* flexcontainerMain становится строкой для сайдбара и мейна */
+  .flexcontainerMain { /* Изменен класс на flexcontainerMain */
+      flex-direction: row;
+  }
+  .sideNav {
+    display: flex;
+  }
+  .mobile-menu-toggle {
+    display: none;
+  }
+  .mobile-nav {
+    display: none !important;
+  }
+}

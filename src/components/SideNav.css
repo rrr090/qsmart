@@ -1,0 +1,175 @@
+/* src/components/SideNav.css */
+
+.sideNav {
+    position: relative;
+    height: 90vh;
+    width: 13vw;
+    background-color: #fff;
+    border-radius: 13px;
+    box-shadow: 0 4px 4px #31406733;
+    min-width: 290px;
+    margin-top: 2vh;
+    margin-left: 2.5vw;
+    margin-right: 30px;
+}
+
+.sideflex {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.logoflex {
+    display: flex;
+    justify-content: center; /* Центрируем логотип */
+    align-items: center;
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: var(--spacing-md);
+}
+
+.sidenav-logo {
+    font-family: var(--font-pacific);
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.8em;
+    color: var(--primary-color);
+    text-align: center;
+    text-decoration: none;
+    transition: color var(--transition-speed-normal) var(--transition-ease);
+}
+
+.sidenav-logo:hover {
+    color: var(--primary-dark-color);
+}
+
+.sidenav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    flex-grow: 1;
+}
+
+.sidenav-list li {
+    margin-bottom: 0;
+}
+
+.sidenav-link {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-decoration: none;
+    color: var(--text-color-dark);
+    font-weight: 500;
+    border-radius: var(--border-radius-sm);
+    transition: background-color var(--transition-speed-normal) var(--transition-ease),
+                color var(--transition-speed-normal) var(--transition-ease);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.sidenav-link:hover {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+}
+
+.sidenav-link.active {
+    background-color: var(--primary-dark-color);
+    color: var(--text-color-light);
+    font-weight: bold;
+}
+
+.sidenav-link.logout-button {
+    background-color: var(--danger-color);
+    color: var(--text-color-light);
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: left;
+}
+
+.sidenav-link.logout-button:hover {
+    background-color: #c82333;
+}
+
+/* Стили для обычного чекбокса (если не используется Pretty Checkbox) */
+.filter-checkbox-label {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    color: var(--text-color-dark);
+    cursor: pointer;
+    padding: var(--spacing-xs) 0; /* Небольшой padding для области клика */
+}
+
+.filter-checkbox-label input[type="checkbox"] {
+    margin-right: var(--spacing-sm); /* Отступ между чекбоксом и текстом */
+    /* Дополнительные стили для кастомизации чекбокса, если нужно */
+}
+
+.filter-checkbox-label:hover {
+    color: var(--primary-dark-color);
+}
+
+
+/* Разделитель между группами ссылок */
+.sidenav-separator {
+    border-top: 1px solid var(--border-color);
+    margin: var(--spacing-md) 0;
+}@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');
+
+.accordion-item {
+  border: 0 !important;
+  background: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+  background-color: #f4f1e9;
+  border-radius: 10px !important;
+  margin-bottom: 10px;
+}
+
+.accordion-button {
+  
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: #000 !important;
+  padding: 1rem 1.25rem !important;
+  border-radius: 10px !important;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+}
+
+.accordion-button:not(.collapsed) {
+  color: white !important;
+  background-color: #3fbaff !important;
+}
+
+.accordion-button:focus {
+  box-shadow: none !important;
+  border-color: #86b7fe !important;
+}
+
+.accordion-body {
+  background: rgba(255, 255, 255, 0.9) !important;
+  padding: 1rem 1.25rem !important;
+  border-radius: 10px !important;
+}
+.accordion-body ul,li {
+  list-style: none;
+}
+.accordion-collapse {
+  transition: height 0.3s ease !important;
+}
+
+/* Медиа-запросы для адаптивности сайдбара */
+@media (max-width: 768px) {
+    .sideNav {
+        display: none; /* Скрываем сайдбар на мобильных */
+    }
+}
+
+@media (min-width: 769px) {
+    .sideNav {
+        display: flex; /* Показываем сайдбар на десктопах */
+        flex-direction: column;
+    }
+}

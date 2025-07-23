@@ -1,51 +1,39 @@
 // src/App.js
-import React, { useState, useEffect } from 'react'; // Импортируем useEffect
-import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
+import { BrowserRouter as Router, Route, Routes, NavLink, useLocation } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Импорт страниц вашего приложения
-import HomePage from './pages/HomePage';
+import HomePage from './pages/HomePage'; // Это наша новая Landing Page
 import OpportunitiesPage from './pages/OpportunitiesPage';
-import AboutPage from './pages/AboutPage';
 import Login from './components/Login';
 import AdminDashboard from './pages/AdminDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
-
 // Импорт контекста аутентификации
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 
 // Импорт основного CSS-файла
-import './App.css';
+import './App.css'; 
 
 // Импорт страниц админ-панели (вложенные маршруты)
 import AdminOverviewPage from './pages/admin/AdminOverviewPage';
 import OpportunityListAdmin from './pages/admin/OpportunityListAdmin';
 import OpportunityForm from './components/OpportunityForm';
 
-// Этот компонент содержит всю основную логику и UI, которые зависят от AuthContext.
+// ИМПОРТ: SideNav
+import SideNav from './components/SideNav';
+
+
 function AppContent() {
     const { currentUser, logout } = useAuth();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const footerRef = useRef(null); // Оставлен, так как может использоваться для футера
+    const location = useLocation(); // Получаем текущий объект location
 
-    // --- НОВОЕ: useEffect для инициализации Twemoji ---
-     useEffect(() => {
-        console.log("AppContent useEffect: Running for Twemoji initialization.");
-        console.log("window.twemoji (initial check):", window.twemoji);
-
-        const twemojiLoadCheck = setTimeout(() => {
-            if (window.twemoji) {
-                console.log("Twemoji found after delay, parsing document body.");
-                window.twemoji.parse(document.body, {
-                    folder: 'svg',
-                    ext: '.svg',
-                    base: '/svg/' // <-- ЭТОТ ПУТЬ ПРАВИЛЕН, ЕСЛИ ВЫ ПОМЕСТИЛИ SVG В public/svg/
-                });
-            } else {
-                console.log("Twemoji still not found after delay. Script might not be loaded or accessible.");
-            }
-        }, 500);
-
-        return () => clearTimeout(twemojiLoadCheck);
-    }, []); // Пустой массив зависимостей означает, что эффект запустится один раз при монтировании
+    // Определяем, является ли текущая страница главной (Landing Page)
+    const isLandingPage = location.pathname === '/';
+    // Определяем, должен ли SideNav быть показан (на странице возможностей и админ-панели)
+    const showSideNav = location.pathname === '/opportunities' || location.pathname.startsWith('/admin');
 
     // Функция для переключения состояния мобильного меню
     const toggleMobileMenu = () => {
@@ -65,95 +53,60 @@ function AppContent() {
     const getNavLinkClass = ({ isActive }) =>
         isActive ? "nav-link active" : "nav-link";
 
+    // Определяем высоту футера из CSS переменных
+    // const footerHeight = 60; // В пикселях, соответствует var(--footer-fixed-height)
+    // Динамический расчет min-height для App-main
+    // Хедера теперь нет на внутренних страницах, поэтому расчет упрощается
+    // const appMainMinHeight = `calc(100vh - ${footerHeight}px)`; // Закомментировано, так как управляется CSS
+
+
     return (
         <div className="App">
-            {/* --- HEADER: Содержит только Логотип и Кнопку переключения мобильного меню --- */}
-            <header className="App-header">
-                <div className="header-content">
-                    <NavLink to="/" className="site-logo">
-                        Qsmart — твоя площадка для роста.
-                    </NavLink>
-                    <button
-                        className="mobile-menu-toggle"
-                        onClick={toggleMobileMenu}
-                        aria-label="Toggle mobile menu"
-                    >
-                        ☰
-                    </button>
-                </div>
+            {/* --- HEADER: Только на главной странице --- */}
+            {isLandingPage && (
+                <header className={`App-header landing-header`}> {/* Класс landing-header всегда, когда хедер виден */}
+                    <div className="header-content">
+                        <NavLink to="/" className="site-logo">
+                            Qsmart
+                        </NavLink>
+                    </div>
+                </header>
+            )}
 
-                {/* --- МОБИЛЬНОЕ НАВИГАЦИОННОЕ МЕНЮ --- */}
-                <nav className={`mobile-nav ${isMobileMenuOpen ? 'open' : ''}`}>
-                    <ul>
-                        <li><NavLink to="/" className={getNavLinkClass} onClick={toggleMobileMenu}>Главная</NavLink></li>
-                        <li><NavLink to="/opportunities" className={getNavLinkClass} onClick={toggleMobileMenu}>Все возможности</NavLink></li>
-                        <li><NavLink to="/about" className={getNavLinkClass} onClick={toggleMobileMenu}>О нас</NavLink></li>
-                        {currentUser && currentUser.role === 'admin' && (
-                            <li><NavLink to="/admin" className={getNavLinkClass} onClick={toggleMobileMenu}>Админ-панель</NavLink></li>
-                        )}
-                        {currentUser ? (
-                            <li><button onClick={() => { handleLogout(); toggleMobileMenu(); }} className="nav-link">Выйти</button></li>
-                        ) : (
-                            <li><NavLink to="/admin/login" className={getNavLinkClass} onClick={toggleMobileMenu}>Войти</NavLink></li>
-                        )}
-                    </ul>
-                </nav>
-            </header>
+            {/* --- КОНТЕЙНЕР ДЛЯ САЙДБАРА И ОСНОВНОГО КОНТЕНТА --- */}
+            {/* Этот контейнер будет flex-row для десктопов и flex-column для мобильных */}
+            {/* Класс landing-body-content для главной страницы, чтобы убрать padding-top */}
+            <div className={`flexcontainerMain ${isLandingPage ? 'landing-body-content' : ''}`}> {/* Изменен класс на flexcontainerMain */}
+                {/* --- САЙДБАР (отображается только на странице возможностей и админ-панели) --- */}
+                {showSideNav && (
+                    <SideNav />
+                )}
 
-            {/* --- ОСНОВНАЯ НАВИГАЦИЯ (только для десктопов) --- */}
-            <nav className="main-navigation">
-                <ul className="desktop-nav-list">
-                    <li><NavLink to="/" className={getNavLinkClass}>Главная</NavLink></li>
-                    <li><NavLink to="/opportunities" className={getNavLinkClass}>Все возможности</NavLink></li>
-                    <li><NavLink to="/about" className={getNavLinkClass}>О нас</NavLink></li>
-                    {currentUser && currentUser.role === 'admin' && (
-                        <li><NavLink to="/admin" className={getNavLinkClass}>Админ-панель</NavLink></li>
-                    )}
-                    {currentUser ? (
-                        <li><button onClick={handleLogout} className="nav-link">Выйти</button></li>
-                    ) : (
-                        <li><NavLink to="/admin/login" className={getNavLinkClass}>Войти</NavLink></li>
-                    )}
-                </ul>
-            </nav>
+                {/* --- ОБЛАСТЬ ОСНОВНОГО КОНТЕНТА --- */}
+                {/* App-main теперь получает класс 'content-with-sidenav' для стилизации flexcontainer */}
+                <main className={`App-main ${showSideNav ? 'content-with-sidenav' : ''}`}> {/* minHeight удален */}
+                    <Routes>
+                        <Route path="/" element={<HomePage />} /> {/* HomePage теперь Landing Page */}
+                        <Route path="/opportunities" element={<OpportunitiesPage />} />
+                        <Route path="/admin/login" element={<Login />} />
+                        <Route
+                            path="/admin"
+                            element={
+                                <ProtectedRoute>
+                                    <AdminDashboard />
+                                </ProtectedRoute>
+                            }
+                        >
+                            <Route index element={<AdminOverviewPage />} />
+                            <Route path="opportunities" element={<OpportunityListAdmin />} />
+                            <Route path="opportunities/new" element={<OpportunityForm />} />
+                            <Route path="opportunities/edit/:id" element={<OpportunityForm />} />
+                        </Route>
+                        <Route path="*" element={<h2>404 - Страница не найдена</h2>} />
+                    </Routes>
+                </main>
+            </div>
 
-            {/* --- ОБЛАСТЬ ОСНОВНОГО КОНТЕНТА --- */}
-            <main className="App-main">
-                <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/opportunities" element={<OpportunitiesPage />} />
-                    <Route path="/about" element={<AboutPage />} />
-                    <Route path="/admin/login" element={<Login />} />
-                    <Route
-                        path="/admin"
-                        element={
-                            <ProtectedRoute>
-                                <AdminDashboard />
-                            </ProtectedRoute>
-                        }
-                    >
-                        <Route index element={<AdminOverviewPage />} />
-                        <Route path="opportunities" element={<OpportunityListAdmin />} />
-                        <Route path="opportunities/new" element={<OpportunityForm />} />
-                        <Route path="opportunities/edit/:id" element={<OpportunityForm />} />
-                    </Route>
-                    <Route path="*" element={<h2>404 - Страница не найдена</h2>} />
-                </Routes>
-            </main>
-
-            {/* --- ФУТЕР --- */}
-            <footer className="App-footer">
-                <div className="footer-left">
-                    <a href="https://your-social-media-link.com" target="_blank" rel="noopener noreferrer">@Qsmart</a>
-                </div>
-                <div className="footer-center">
-                    {/* Здесь будет эмодзи флага, который Twemoji заменит на изображение */}
-                    <span>🇰🇿</span> Казахстан
-                </div>
-                <div className="footer-right">
-                    &copy; 2025
-                </div>
-            </footer>
         </div>
     );
 }
