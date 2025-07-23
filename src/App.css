@@ -2,8 +2,10 @@
 
 /* --- 1. Импорт переменных --- */
 @import './styles/variables.css';
-@import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Circular:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+
 
 /* --- 2. Базовые стили и настройка "липкого" футера --- */
 html,
@@ -12,62 +14,72 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color: var(--main-black);
 }
 
 .App {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: var(--main-dark-gray);
 }
 
 body {
-  background-color: var(--background-main);
-  color: var(--text-color-dark);
-  font-family: var(--font-family-primary);
-  font-size: var(--font-size-base);
+  background-color: var(--main-dark-gray);
+  color: var(--main-text-white);
+  font-family: 'Circular', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
 }
 
 a {
   text-decoration: none;
-  color: var(--text-color-dark);
+  color: var(--main-text-white);
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--main-green);
 }
 
 /* --- 3. Стили хедера --- */
 .App-header {
-  background-color: var(--header-top-color);
-  height: var(--header-fixed-height);
+  background: linear-gradient(135deg, var(--main-black) 0%, var(--main-medium-gray) 100%);
+  height: 64px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-color-dark);
-  padding: 0 var(--spacing-lg);
-  border-bottom: 3px solid var(--button-block-color);
+  font-size: 16px;
+  color: var(--main-text-white);
+  padding: 0 24px;
+  border-bottom: 1px solid var(--main-border);
   flex-shrink: 0;
   box-sizing: border-box;
-  transition: background-color 0.3s ease, border-bottom 0.3s ease;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
 /* Стили для хедера на лендинговой странице (прозрачный) */
 .App-header.landing-header {
-    background-color: transparent;
+    background: rgba(0, 0, 0, 0.7);
     border-bottom: none;
-    position: absolute; /* Позиционируем поверх hero-секции */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 10;
-    color: #fff; /* Белый текст для контраста с фоном */
+    color: var(--main-white);
+    backdrop-filter: blur(20px);
 }
 
 .App-header.landing-header .site-logo {
-    color: #fff;
+    color: var(--main-green);
 }
 .App-header.landing-header .mobile-menu-toggle {
-    color: #fff;
+    color: var(--main-green);
 }
-
 
 .header-content {
   width: 100%;
@@ -77,87 +89,90 @@ a {
 }
 
 .site-logo {
-  font-family: var(--font-pacific);
-  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
   font-style: normal;
-  color: var(--text-color-dark);
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  transition: all var(--transition-speed-normal) var(--transition-ease);
+  transition: all 0.2s ease;
   cursor: pointer;
   text-decoration: none;
+  color: var(--main-green);
+  font-size: 20px;
 }
 
 .site-logo:hover {
-  color: var(--primary-dark-color);
-  transform: scale(1.05);
-  text-shadow: 1px 1px 4px var(--shadow-color);
+  color: var(--main-green-hover);
+  transform: scale(1.02);
+  filter: drop-shadow(0 0 8px rgba(29, 185, 84, 0.3));
 }
 
 /* --- 4. КОНТЕЙНЕР ДЛЯ САЙДБАРА И ОСНОВНОГО КОНТЕНТА --- */
-/* Изменен класс на flexcontainerMain */
 .flexcontainerMain {
   display: flex;
   justify-content: space-between;
-
+  background-color: var(--main-dark-gray);
+  gap: 8px;
+  padding: 8px;
 }
 
 /* Отступ сверху для flexcontainerMain, когда хедер отсутствует (для внутренних страниц) */
 .flexcontainerMain:not(.landing-body-content) {
-
+  /* Removed padding-top */
 }
-
 
 /* --- 5. Main content Styles (App-main) --- */
-/* App-main по умолчанию */
 .App-main {
-  flex-grow: 1; /* Позволяет App-main занимать все доступное пространство */
-  background-color: var(--background-main);
-  display: flex; /* Делаем App-main Flex-контейнером */
-  flex-direction: column; /* Элементы внутри будут располагаться в колонку */
-  justify-content: center; /* Центрируем содержимое по вертикали */
-  align-items: center; /* Центрируем содержимое по горизонтали */
+  flex-grow: 1;
+  background: linear-gradient(180deg, var(--main-medium-gray) 0%, var(--main-dark-gray) 300px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
   box-sizing: border-box;
-  overflow-y: auto; /* Позволяет прокручиваться содержимому App-main */
+  overflow-y: auto;
+  border-radius: 8px;
+  padding: 24px;
 }
 
-/* Стили для App-main, когда SideNav присутствует (пользовательский flexcontainer) */
+/* Стили для App-main, когда SideNav присутствует */
 .App-main.content-with-sidenav {
-    flex-direction: column; /* Элементы внутри будут располагаться в колонку */
-    flex: 1 1 auto; /* Растягивается и сжимается */
-    padding-right: 50px; /* Пользовательский padding-right */
-    height: 100vh; /* **КЛЮЧЕВОЕ**: Занимает всю высоту родителя flexcontainerMain */
-    margin-left: 3px; /* Пользовательский margin-left */
-    overflow-y: auto; /* Прокрутка для этого контейнера */
-    background-color: var(--background-main); /* Убедитесь, что фон правильный */
+    flex-direction: column;
+    flex: 1 1 auto;
+    padding: 24px 32px;
+    height: calc(100vh - 80px);
+    margin-left: 0;
+    overflow-y: auto;
+    background: linear-gradient(180deg, rgba(40, 40, 40, 0.8) 0%, var(--main-dark-gray) 300px);
     box-sizing: border-box;
+    border-radius: 8px;
 }
-
 
 /* --- 6. Футер --- */
 .App-footer {
-  border-top: 3px solid var(--text-color-dark);
-  color: var(--text-color-dark);
-  height: var(--footer-fixed-height);
-  padding: 0 var(--spacing-md);
+  border-top: 1px solid var(--main-border);
+  color: var(--main-text-light);
+  height: 72px;
+  padding: 0 24px;
   flex-shrink: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: var(--font-size-base);
-  background-color: var(--header-top-color);
+  font-size: 12px;
+  background-color: var(--main-black);
   box-sizing: border-box;
+  font-weight: 400;
 }
 
 .App-footer a {
-    color: var(--text-color-dark);
+    color: var(--main-text-light);
     text-decoration: none;
-    font-weight: bold;
-    transition: color var(--transition-speed-normal) var(--transition-ease);
+    font-weight: 500;
+    transition: color 0.2s ease;
 }
 
 .App-footer a:hover {
-    color: var(--primary-dark-color);
+    color: var(--main-green);
 }
 
 .App-footer .footer-center {
@@ -167,11 +182,11 @@ a {
 }
 
 .App-footer .footer-center img.flag-icon {
-    width: 24px;
+    width: 20px;
     height: auto;
     vertical-align: middle;
     border-radius: 2px;
-    box-shadow: 0 0 3px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 /* --- 7. Мобильная навигация и переключатель --- */
@@ -179,22 +194,30 @@ a {
   display: none;
   background: none;
   border: none;
-  font-size: 2em;
+  font-size: 24px;
   cursor: pointer;
-  color: var(--text-color-dark);
-  padding: 5px 10px;
+  color: var(--main-text-white);
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.mobile-menu-toggle:hover {
+  background-color: var(--main-light-gray);
+  color: var(--main-green);
 }
 
 .mobile-nav {
   display: none;
   width: 100%;
-  background-color: var(--header-top-color);
-  box-shadow: 0 2px 10px var(--shadow-color);
+  background: linear-gradient(135deg, var(--main-black) 0%, var(--main-medium-gray) 100%);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
   overflow: hidden;
   max-height: 0;
   opacity: 0;
   flex-direction: column;
-  transition: max-height var(--transition-speed-normal) var(--transition-ease), opacity var(--transition-speed-normal) var(--transition-ease);
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
 .mobile-nav.open {
@@ -206,89 +229,117 @@ a {
 .mobile-nav ul {
   list-style: none;
   margin: 0;
-  padding: var(--spacing-md) 0;
+  padding: 16px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: 8px;
 }
 
 .mobile-nav li {
-  padding: var(--spacing-sm);
-  border-radius: var(--border-radius-lg);
-  background-color: var(--button-block-color);
+  padding: 12px 20px;
+  border-radius: 24px;
+  background-color: var(--main-card-bg);
   width: 80%;
   text-align: center;
+  transition: all 0.2s ease;
+  border: 1px solid var(--main-border);
+}
+
+.mobile-nav li:hover {
+  background-color: var(--main-light-gray);
+  border-color: var(--main-green);
 }
 
 .mobile-nav li button {
     background: none;
     border: none;
-    color: var(--text-color-dark);
-    font-size: var(--font-size-base);
+    color: var(--main-text-white);
+    font-size: 14px;
+    font-weight: 500;
     cursor: pointer;
     padding: 0;
+    transition: color 0.2s ease;
+}
+
+.mobile-nav li button:hover {
+    color: var(--main-green);
 }
 
 .mobile-nav .nav-link {
-  color: var(--text-color-dark);
+  color: var(--main-text-white);
   font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 .mobile-nav .nav-link.active {
-  color: var(--text-color-light);
+  color: var(--main-green);
 }
-
 
 /* --- 8. Секция фильтров (если есть) --- */
 .filters {
   display: flex;
   justify-content: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-lg);
+  gap: 12px;
+  margin-bottom: 32px;
   flex-wrap: wrap;
 }
 
 .filters button {
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: none;
-  border-radius: var(--border-radius-sm);
-  background-color: var(--background-main);
-  color: var(--text-color-dark);
+  padding: 8px 16px;
+  border: 1px solid var(--main-border);
+  border-radius: 20px;
+  background-color: var(--main-card-bg);
+  color: var(--main-text-white);
   cursor: pointer;
-  transition: background-color var(--transition-speed-normal) var(--transition-ease);
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.filters button:hover {
+  background-color: var(--main-light-gray);
+  border-color: var(--main-green);
+  color: var(--main-green);
 }
 
 .filters button.active {
-  background-color: var(--button-block-color);
-  color: var(--text-color-dark);
+  background-color: var(--main-green);
+  color: var(--main-black);
+  border-color: var(--main-green);
 }
 
 /* --- 9. Медиа-запросы для адаптивности --- */
 
-@media (max-width: 768px) { /* Мобильные стили */
+@media (max-width: 768px) {
   .App-header {
     flex-direction: row;
     justify-content: space-between;
-    padding: var(--spacing-sm) var(--spacing-md);
-    height: var(--header-fixed-height);
+    padding: 12px 16px;
+    height: 64px;
   }
-  /* На мобильных flexcontainerMain будет в колонку, сайдбар скрыт */
-  .flexcontainerMain { /* Изменен класс на flexcontainerMain */
+  
+  .flexcontainerMain {
       flex-direction: column;
-      padding-top: 0; /* Убираем padding-top, если хедер не прозрачный */
+      padding: 8px;
+      gap: 0;
   }
+  
   .sideNav {
     display: none;
   }
+  
   .mobile-menu-toggle {
     display: block;
   }
+  
   .App-footer {
     flex-direction: column;
     text-align: center;
-    gap: var(--spacing-sm);
-    padding: var(--spacing-md) var(--spacing-sm);
+    gap: 12px;
+    padding: 16px;
     height: auto;
   }
 
@@ -299,34 +350,70 @@ a {
       text-align: center;
   }
 
-  /* На мобильных App-main не должен иметь sideNav-специфичных стилей */
   .App-main.content-with-sidenav {
-      width: 100vh;
-      padding-right: var(--spacing-md); /* Стандартный padding */
-      margin-left: 0; /* Убрать margin-left */
-      height: auto; /* Автоматическая высота */
-      overflow-y: visible; /* Прокрутка будет на App-main по умолчанию */
+      width: 100%;
+      padding: 16px;
+      margin-left: 0;
+      height: auto;
+      overflow-y: visible;
+      border-radius: 0;
   }
 }
 
-@media (min-width: 769px) { /* Десктопные стили */
+@media (min-width: 769px) {
   .App-header {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: var(--header-fixed-height);
+    height: 64px;
   }
-  /* flexcontainerMain становится строкой для сайдбара и мейна */
-  .flexcontainerMain { /* Изменен класс на flexcontainerMain */
+  
+  .flexcontainerMain {
       flex-direction: row;
   }
+  
   .sideNav {
     display: flex;
   }
+  
   .mobile-menu-toggle {
     display: none;
   }
+  
   .mobile-nav {
     display: none !important;
   }
+}
+
+/* --- Additional Spotify-like enhancements --- */
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--main-dark-gray);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--main-light-gray);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--main-border);
+}
+
+/* Focus states */
+button:focus,
+a:focus {
+  outline: 2px solid var(--main-green);
+  outline-offset: 2px;
+}
+
+/* Selection styling */
+::selection {
+  background-color: var(--main-green);
+  color: var(--main-black);
 }

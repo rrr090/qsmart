@@ -9,73 +9,131 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    /* Добавляем min-height, чтобы flex-grow: 1 работал корректно,
-       особенно если контента очень мало. Это позволит grid занять
-       доступное пространство для прокрутки. */
-    min-height: 0; /* Важно для flex-контейнера, чтобы его дочерние элементы с flex-grow: 1 могли сжиматься */
+    min-height: 0;
+    padding: 24px;
+    background: linear-gradient(180deg, rgba(40, 40, 40, 0.3) 0%, transparent 200px);
 }
 
 .opportunities-content-inner h2 {
     text-align: center;
-    font-family: var(--font-bad-script);
-    font-weight: 700;
-    margin-bottom: var(--spacing-xl);
-    color: var(--text-color-dark);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    margin-bottom: 32px;
+    color: var(--main-text-white);
     font-size: 3.5em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, var(--main-green) 0%, var(--main-green-hover) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px rgba(29, 185, 84, 0.3));
 }
-
 
 /* --- 3. Сетка возможностей (ВЕРТИКАЛЬНАЯ ПРОКРУТКА) --- */
 .opportunities-grid {
-    
-    margin-top: 2.0408163265306123vh;
+    margin-top: 24px;
     padding-left: 0 !important;
     scroll-behavior: smooth;
     -ms-overflow-style: none;
     scrollbar-width: none;
     width: 100%;
-
-    
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-lg);
+    display: grid;
+    grid-template-columns: repeat(1, minmax(320px, 1fr));
+    gap: 24px;
     justify-items: center;
     align-items: start;
     
     /* КЛЮЧЕВЫЕ ИЗМЕНЕНИЯ ДЛЯ ВЕРТИКАЛЬНОЙ ПРОКРУТКИ */
-    flex-grow: 1; /* Позволяет сетке занимать оставшееся вертикальное пространство */
-    overflow-y: auto; /* Включает вертикальную прокрутку только для этого блока */
-    box-sizing: border-box; /* Учитывает padding в размере */
-    padding-right: var(--spacing-sm); /* Добавляем небольшой padding справа, чтобы полоса прокрутки не прилипала к краю */
-
-    /* Стилизация полосы прокрутки (Webkit browsers) */
+    flex-grow: 1;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding-right: 16px;
+    
+    /* Стилизация полосы прокрутки в стиле Spotify */
     &::-webkit-scrollbar {
-        width: 8px; /* Ширина вертикальной полосы прокрутки */
+        width: 12px;
     }
     &::-webkit-scrollbar-track {
-        background: var(--background-main);
-        border-radius: 10px;
+        background: var(--main-dark-gray);
+        border-radius: 6px;
     }
     &::-webkit-scrollbar-thumb {
-        background: var(--primary-color);
-        border-radius: 10px;
+        background: var(--main-light-gray);
+        border-radius: 6px;
+        transition: background 0.2s ease;
     }
     &::-webkit-scrollbar-thumb:hover {
-        background: var(--primary-dark-color);
+        background: var(--main-border);
     }
 }
 
+/* Fallback для браузеров, не поддерживающих &: */
+.opportunities-grid::-webkit-scrollbar {
+    width: 12px;
+}
+.opportunities-grid::-webkit-scrollbar-track {
+    background: var(--main-dark-gray);
+    border-radius: 6px;
+}
+.opportunities-grid::-webkit-scrollbar-thumb {
+    background: var(--main-light-gray);
+    border-radius: 6px;
+    transition: background 0.2s ease;
+}
+.opportunities-grid::-webkit-scrollbar-thumb:hover {
+    background: var(--main-border);
+}
 
 .opportunities-page-wrapper {
     align-items: center;
     justify-items: center;
     width: 100%;
+    background-color: var(--main-dark-gray);
 }
-.opportunities-page-container{
+
+.opportunities-page-container {
     align-items: center;
     justify-items: center;
     width: 100%;
+    background-color: var(--main-dark-gray);
 }
 
+/* --- 4. Карточки возможностей (базовые стили) --- */
+.opportunity-card {
+    background: linear-gradient(135deg, var(--main-card-bg) 0%, var(--main-medium-gray) 100%);
+    border: 1px solid var(--main-border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.opportunity-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--main-green) 0%, var(--main-green-hover) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.opportunity-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--main-green);
+    box-shadow: 0 8px 32px rgba(29, 185, 84, 0.2);
+    background: linear-gradient(135deg, var(--main-green-darker) 0%, var(--main-card-bg) 100%);
+}
+
+.opportunity-card:hover::before {
+    opacity: 1;
+}
 
 /* --- 5. Сообщения о состоянии --- */
 .loading-message,
@@ -83,56 +141,144 @@
 .no-opportunities-message {
     text-align: center;
     font-size: 1.2em;
-    color: var(--text-color-muted);
-    margin-top: var(--spacing-xl);
+    color: var(--main-text-light);
+    margin-top: 48px;
     flex-grow: 1;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: 500;
+    padding: 32px;
+    border-radius: 12px;
+    background-color: var(--main-card-bg);
+    border: 1px solid var(--main-border);
 }
 
 .error-message {
-    color: var(--danger-color);
-    font-weight: bold;
+    color: #ff6b6b;
+    border-color: #ff6b6b;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, var(--main-card-bg) 100%);
+    font-weight: 600;
 }
 
+.loading-message {
+    color: var(--main-green);
+    border-color: var(--main-green);
+    background: linear-gradient(135deg, rgba(29, 185, 84, 0.1) 0%, var(--main-card-bg) 100%);
+}
 
 /* --- 7. Медиа-запросы для адаптивности --- */
-
-
-
 @media (max-width: 768px) {
     .opportunities-content-inner {
-        padding: var(--spacing-md) var(--spacing-sm);
+        padding: 16px;
     }
-    .opportunities-grid {
-        grid-template-columns: 1fr; /* Одна колонка на мобильных */
-    }
-    .opportunities-grid .opportunity-card {
-        width: 100%; /* Карточка занимает всю ширину на мобильных */
-    }
-
+    
     .opportunities-content-inner h2 {
-        font-size: 2em;
-        margin-bottom: var(--spacing-lg);
+        font-size: 2.5em;
+        margin-bottom: 24px;
+        letter-spacing: 1px;
+    }
+    
+    .opportunities-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 16px;
+        padding-right: 8px;
+    }
+    
+    .opportunity-card {
+        width: 100%;
+        padding: 20px;
     }
 
     .filter-sort-controls {
         flex-direction: column;
         align-items: stretch;
-        gap: var(--spacing-sm);
+        gap: 16px;
+        padding: 16px;
     }
 
     .filter-controls,
     .sort-controls {
         justify-content: center;
         flex-direction: column;
-        gap: 5px;
+        gap: 8px;
+        width: 100%;
     }
 
     .filter-select,
     .sort-select {
         width: 100%;
         max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .filter-controls label,
+    .sort-controls label {
+        text-align: center;
+    }
+
+    .loading-message,
+    .error-message,
+    .no-opportunities-message {
+        margin-top: 24px;
+        padding: 24px 16px;
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .opportunities-content-inner h2 {
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+    
+    .opportunities-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .opportunity-card {
+        padding: 16px;
+        border-radius: 8px;
+    }
+    
+    .filter-sort-controls {
+        padding: 12px;
+        border-radius: 8px;
+    }
+}
+
+/* --- 8. Дополнительные эффекты в стиле Spotify --- */
+.opportunities-content-inner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: radial-gradient(ellipse at center top, rgba(29, 185, 84, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Анимация появления карточек */
+.opportunity-card {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.opportunity-card:nth-child(1) { animation-delay: 0.1s; }
+.opportunity-card:nth-child(2) { animation-delay: 0.2s; }
+.opportunity-card:nth-child(3) { animation-delay: 0.3s; }
+.opportunity-card:nth-child(4) { animation-delay: 0.4s; }
+.opportunity-card:nth-child(5) { animation-delay: 0.5s; }
+.opportunity-card:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

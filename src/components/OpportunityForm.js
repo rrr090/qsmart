@@ -177,22 +177,31 @@ function OpportunityForm() {
                         <option value="Конкурс">Конкурс</option>
                         <option value="Кружок">Кружок</option>
                         <option value="Лекция">Лекция</option>
-                        <option value="Грант">Грант</option>
                         <option value="Мероприятие">Мероприятие</option>
-                        {/* Добавьте другие типы по необходимости */}
                     </select>
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="category">Категория:</label>
-                    <input
+                    <select
                         type="text"
                         id="category"
                         name="category"
                         value={formData.category}
                         onChange={handleChange}
                         required
-                    />
+                    >
+                        <option value="">Выберите тип</option>
+                        <option value="math">Математика</option>
+                        <option value="phys">Физика</option>
+                        <option value="it">IT</option>
+                        <option value="bio">Биология</option>
+                        <option value="chem">Химия</option>
+                        <option value="hist">История</option>
+                        <option value="art">Искусство</option>
+                        <option value="sport">Спорт</option>
+                        <option value="lang">Языки</option>
+                    </select>
                 </div>
 
                 <div className="form-group">

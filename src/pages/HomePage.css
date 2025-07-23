@@ -2,165 +2,419 @@
 
 .landing-page {
     width: 100%;
-    /* Landing page будет занимать всю доступную ширину App-main */
-    /* App-main уже flex-grow: 1 и overflow-y: auto */
-    /* Поэтому здесь не нужно устанавливать height: 100vh; или min-height */
+    overflow-x: hidden;
+    background: #000000;
+    color: #ffffff;
 }
 
 .landing-hero {
     position: relative;
-    height: calc(100vh - var(--header-fixed-height) - var(--footer-fixed-height)); /* Занимает оставшееся пространство */
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://placehold.co/1920x1080/303c6c/d2fdff?text=Фон+Лендинга') no-repeat center center/cover;
-    color: #fff;
+    height: calc(100vh - var(--header-fixed-height) - var(--footer-fixed-height));
+    background: 
+                radial-gradient(circle at 20% 80%, rgba(29, 185, 84, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(30, 215, 96, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 107, 107, 0.08) 0%, transparent 40%),
+                linear-gradient(135deg, #000000 0%, #0a0a0a 20%, #121212 40%, #1a1a1a 70%, #0d1b2a 100%);
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     padding: var(--spacing-xl);
     box-sizing: border-box;
+    overflow: hidden;
+}
+
+.landing-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 30%, rgba(29, 185, 84, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(30, 215, 96, 0.05) 0%, transparent 50%);
+    animation: pulseGlow 8s ease-in-out infinite;
 }
 
 .hero-content {
     max-width: 800px;
-    animation: fadeIn 1.5s ease-out;
+    animation: heroFloat 6s ease-in-out infinite;
+    z-index: 2;
+    position: relative;
 }
 
 .hero-content h1 {
-    font-size: 3.5em;
+    font-size: 4em;
+    line-height: normal;
     margin-bottom: var(--spacing-md);
-    font-family: var(--font-bad-script); /* Используем Bad Script для заголовка */
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    font-family: var(--font-bad-script);
+    font-weight: 900;
+    background: linear-gradient(135deg, #1db954 0%, #1ed760 50%, #ffffff 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s ease-in-out infinite;
+    text-shadow: 0 0 40px rgba(29, 185, 84, 0.3);
+    letter-spacing: -0.02em;
 }
 
 .hero-content p {
-    font-size: 1.3em;
+    font-size: 1.4em;
     margin-bottom: var(--spacing-lg);
     line-height: 1.6;
+    color: #b3b3b3;
+    font-weight: 400;
+    opacity: 0.9;
 }
 
 .explore-button,
 .cta-button {
-    background-color: var(--button-block-color); /* Цвет кнопки */
-    color: var(--text-color-dark); /* Цвет текста кнопки */
-    padding: var(--spacing-md) var(--spacing-xl);
+    background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
+    color: #000000;
+    padding: 16px 32px;
     border: none;
-    border-radius: var(--border-radius-lg); /* Закругленные углы */
+    border-radius: 50px;
     font-size: 1.2em;
-    font-weight: bold;
+    font-weight: 700;
     cursor: pointer;
-    transition: all var(--transition-speed-normal) var(--transition-ease);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 8px 32px rgba(29, 185, 84, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.explore-button::before,
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s;
+}
+
+.explore-button:hover::before,
+.cta-button:hover::before {
+    left: 100%;
 }
 
 .explore-button:hover,
 .cta-button:hover {
-    background-color: var(--primary-dark-color); /* Темнее при наведении */
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 12px 40px rgba(29, 185, 84, 0.5);
+    background: linear-gradient(135deg, #1ed760 0%, #21e065 100%);
 }
+/* Floating particles */
+        .particle {
+            position: absolute;
+            background: rgba(29, 185, 84, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .particle:nth-child(1) {
+            width: 4px;
+            height: 4px;
+            top: 20%;
+            left: 10%;
+            animation: float 6s ease-in-out infinite, glow 3s ease-in-out infinite alternate;
+        }
+
+        .particle:nth-child(2) {
+            width: 6px;
+            height: 6px;
+            top: 60%;
+            left: 80%;
+            background: rgba(255, 107, 107, 0.7);
+            animation: float 8s ease-in-out infinite reverse, glow 4s ease-in-out infinite alternate;
+            animation-delay: -2s;
+        }
+
+        .particle:nth-child(3) {
+            width: 3px;
+            height: 3px;
+            top: 80%;
+            left: 20%;
+            background: rgba(30, 215, 96, 0.5);
+            animation: float 7s ease-in-out infinite, glow 2.5s ease-in-out infinite alternate;
+            animation-delay: -4s;
+        }
+
+        .particle:nth-child(4) {
+            width: 5px;
+            height: 5px;
+            top: 30%;
+            left: 70%;
+            animation: float 9s ease-in-out infinite reverse, glow 3.5s ease-in-out infinite alternate;
+            animation-delay: -1s;
+        }
+
+        .particle:nth-child(5) {
+            width: 2px;
+            height: 2px;
+            top: 50%;
+            left: 50%;
+            background: rgba(255, 107, 107, 0.4);
+            animation: float 5s ease-in-out infinite, glow 2s ease-in-out infinite alternate;
+            animation-delay: -3s;
+        }
 
 /* Секция "Почему Qsmart?" */
 .landing-features {
     padding: var(--spacing-xl) var(--spacing-lg);
-    background-color: var(--background-main);
+    background: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
     text-align: center;
+    position: relative;
+}
+
+.landing-features::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #1db954, #1ed760, #1db954);
+    animation: pulse 3s ease-in-out infinite;
 }
 
 .landing-features h2 {
-    font-size: 2.8em;
-    color: var(--text-color-dark);
+    font-size: 3em;
+    color: #ffffff;
     margin-bottom: var(--spacing-xl);
     font-family: var(--font-family-primary);
+    position: relative;
+    display: inline-block;
+    font-weight: 900;
+}
+
+.landing-features h2::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #1db954, #1ed760);
+    border-radius: 2px;
 }
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: var(--spacing-lg);
     max-width: 1200px;
     margin: 0 auto;
 }
 
 .feature-item {
-    background-color: var(--background-card);
+    background: linear-gradient(135deg, rgba(18, 18, 18, 0.8) 0%, rgba(26, 26, 26, 0.9) 100%);
     padding: var(--spacing-lg);
-    border-radius: var(--border-radius-md);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease-in-out;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    border: 1px solid rgba(29, 185, 84, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.feature-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #1db954, #1ed760);
+    border-radius: 16px 16px 0 0;
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.feature-item:hover::before {
+    transform: scaleX(1);
 }
 
 .feature-item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-12px);
+    box-shadow: 0 20px 60px rgba(29, 185, 84, 0.2);
+    border-color: rgba(29, 185, 84, 0.3);
 }
 
 .feature-item h3 {
     font-size: 1.8em;
-    color: var(--primary-color);
+    background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: var(--spacing-sm);
+    position: relative;
+    font-weight: 700;
 }
 
 .feature-item p {
     font-size: 1.1em;
-    color: var(--text-color-dark);
+    color: #b3b3b3;
+    line-height: 1.8;
+    font-weight: 400;
 }
 
 /* Секция призыва к действию */
 .landing-cta {
     padding: var(--spacing-xl) var(--spacing-lg);
-    background-color: var(--header-top-color); /* Используем цвет хедера для этой секции */
+    background: linear-gradient(135deg, #0a0a0a 0%, #121212 50%, #1a1a1a 100%);
     text-align: center;
-    color: var(--text-color-dark);
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.landing-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(29, 185, 84, 0.05) 0%, transparent 70%);
+    animation: breathe 6s ease-in-out infinite;
 }
 
 .landing-cta h2 {
-    font-size: 2.5em;
+    font-size: 2.8em;
     margin-bottom: var(--spacing-md);
     font-family: var(--font-family-primary);
+    position: relative;
+    z-index: 2;
+    font-weight: 900;
+    background: linear-gradient(135deg, #ffffff 0%, #b3b3b3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .landing-cta p {
     font-size: 1.2em;
     margin-bottom: var(--spacing-lg);
+    position: relative;
+    z-index: 2;
+    color: #b3b3b3;
+    font-weight: 400;
 }
+/* Animations */
+        @keyframes gradientShift {
+            0% { transform: translateX(-10px) translateY(-10px) scale(1); }
+            100% { transform: translateX(10px) translateY(10px) scale(1.02); }
+        }
 
-/* Анимации */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            50% { transform: translateY(-10px) translateX(-5px); }
+            75% { transform: translateY(-15px) translateX(5px); }
+        }
+
+        @keyframes glow {
+            0% { opacity: 0.3; box-shadow: 0 0 5px currentColor; }
+            100% { opacity: 1; box-shadow: 0 0 20px currentColor, 0 0 40px currentColor; }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.6; }
+        }
+
+        @keyframes titleGlow {
+            0% { filter: brightness(1) drop-shadow(0 0 10px rgba(29, 185, 84, 0.3)); }
+            100% { filter: brightness(1.2) drop-shadow(0 0 20px rgba(29, 185, 84, 0.6)); }
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        @keyframes meshRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: clamp(2rem, 12vw, 4rem);
+            }
+            .shape {
+                display: none;
+            }
+        }
 
 /* Медиа-запросы для адаптивности лендинга */
 @media (max-width: 768px) {
     .landing-hero {
-        height: 70vh; /* Меньшая высота на мобильных */
+        height: 70vh;
+        padding: var(--spacing-lg);
     }
+    
     .hero-content h1 {
-        font-size: 2.5em;
+        font-size: 2.8em;
     }
+    
     .hero-content p {
-        font-size: 1em;
+        font-size: 1.1em;
     }
+    
     .explore-button,
     .cta-button {
-        padding: var(--spacing-md) var(--spacing-lg);
+        padding: 14px 28px;
         font-size: 1em;
     }
+    
     .landing-features {
-        padding: var(--spacing-lg) var(--spacing-sm);
+        padding: var(--spacing-lg) var(--spacing-md);
     }
+    
     .landing-features h2 {
-        font-size: 2em;
+        font-size: 2.2em;
     }
+    
     .features-grid {
-        grid-template-columns: 1fr; /* Одна колонка на мобильных */
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
     }
+    
+    .feature-item:hover {
+        transform: translateY(-6px);
+    }
+    
     .landing-cta {
-        padding: var(--spacing-lg) var(--spacing-sm);
+        padding: var(--spacing-lg) var(--spacing-md);
     }
+    
     .landing-cta h2 {
-        font-size: 2em;
+        font-size: 2.2em;
     }
+    
     .landing-cta p {
-        font-size: 1em;
+        font-size: 1.1em;
     }
 }

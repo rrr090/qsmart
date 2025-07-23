@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import './SideNav.css';
-import PrettyCheckbox from './PrettyCheckbox';
-import "./PrettyCheckbox.css"   
+
 
 // Импорт компонентов React-Bootstrap
 import Accordion from 'react-bootstrap/Accordion';
@@ -25,7 +24,6 @@ const OPPORTUNITY_FILTERS = [
             { name: 'Хакатоны', value: 'Хакатон' },
             { name: 'Кружки', value: 'Кружок' },
             { name: 'Лекции', value: 'Лекция' },
-            { name: 'Гранты', value: 'Грант' },
             { name: 'Мероприятия', value: 'Мероприятие' },
         ]
     },
