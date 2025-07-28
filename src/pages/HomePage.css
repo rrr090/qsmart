@@ -48,7 +48,6 @@
     font-size: 4em;
     line-height: normal;
     margin-bottom: var(--spacing-md);
-    font-family: var(--font-bad-script);
     font-weight: 900;
     background: linear-gradient(135deg, #1db954 0%, #1ed760 50%, #ffffff 100%);
     background-size: 200% 200%;
