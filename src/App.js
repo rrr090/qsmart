@@ -39,6 +39,10 @@ function AppContent() {
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(prev => !prev);
     };
+    // Функция смены тем
+    const [currentTheme, setCurrentTheme] = useState(() => {
+        return localStorage.getItem('theme') || 'light';
+    });
 
     // Функция для обработки выхода пользователя
     const handleLogout = async () => {
@@ -52,12 +56,6 @@ function AppContent() {
     // Вспомогательная функция для определения класса NavLink (для активного состояния)
     const getNavLinkClass = ({ isActive }) =>
         isActive ? "nav-link active" : "nav-link";
-
-    // Определяем высоту футера из CSS переменных
-    // const footerHeight = 60; // В пикселях, соответствует var(--footer-fixed-height)
-    // Динамический расчет min-height для App-main
-    // Хедера теперь нет на внутренних страницах, поэтому расчет упрощается
-    // const appMainMinHeight = `calc(100vh - ${footerHeight}px)`; // Закомментировано, так как управляется CSS
 
 
     return (

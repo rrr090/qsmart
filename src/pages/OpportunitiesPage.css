@@ -10,8 +10,7 @@
     flex-direction: column;
     flex-grow: 1;
     min-height: 0;
-    padding: 24px;
-    background: linear-gradient(180deg, rgba(40, 40, 40, 0.3) 0%, transparent 200px);
+
 }
 
 .opportunities-content-inner h2 {
@@ -50,22 +49,7 @@
     box-sizing: border-box;
     padding-right: 16px;
     
-    /* Стилизация полосы прокрутки в стиле Spotify */
-    &::-webkit-scrollbar {
-        width: 12px;
-    }
-    &::-webkit-scrollbar-track {
-        background: var(--main-dark-gray);
-        border-radius: 6px;
-    }
-    &::-webkit-scrollbar-thumb {
-        background: var(--main-light-gray);
-        border-radius: 6px;
-        transition: background 0.2s ease;
-    }
-    &::-webkit-scrollbar-thumb:hover {
-        background: var(--main-border);
-    }
+
 }
 
 /* Fallback для браузеров, не поддерживающих &: */
@@ -99,41 +83,6 @@
     background-color: var(--main-dark-gray);
 }
 
-/* --- 4. Карточки возможностей (базовые стили) --- */
-.opportunity-card {
-    background: linear-gradient(135deg, var(--main-card-bg) 0%, var(--main-medium-gray) 100%);
-    border: 1px solid var(--main-border);
-    border-radius: 12px;
-    padding: 24px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-}
-
-.opportunity-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--main-green) 0%, var(--main-green-hover) 100%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.opportunity-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--main-green);
-    box-shadow: 0 8px 32px rgba(29, 185, 84, 0.2);
-    background: linear-gradient(135deg, var(--main-green-darker) 0%, var(--main-card-bg) 100%);
-}
-
-.opportunity-card:hover::before {
-    opacity: 1;
-}
 
 /* --- 5. Сообщения о состоянии --- */
 .loading-message,
@@ -157,14 +106,14 @@
 .error-message {
     color: #ff6b6b;
     border-color: #ff6b6b;
-    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, var(--main-card-bg) 100%);
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, var(--main-purple) 100%);
     font-weight: 600;
 }
 
 .loading-message {
-    color: var(--main-green);
-    border-color: var(--main-green);
-    background: linear-gradient(135deg, rgba(29, 185, 84, 0.1) 0%, var(--main-card-bg) 100%);
+    color: var(--main-white);
+    border-color: var(--main-purple);
+    background: linear-gradient(135deg, rgba(29, 185, 84, 0.1) 0%, var(--main-purple) 100%);
 }
 
 /* --- 7. Медиа-запросы для адаптивности --- */

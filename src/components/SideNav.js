@@ -9,6 +9,7 @@ import './SideNav.css';
 import Accordion from 'react-bootstrap/Accordion';
 import Form from 'react-bootstrap/Form';
 
+ 
 // Иконки Material-UI (для стрелок аккордеона)
 
 // Категории возможностей для аккордеона
@@ -41,6 +42,10 @@ const OPPORTUNITY_FILTERS = [
             { name: 'Искусство', value: 'art' },
             { name: 'Спорт', value: 'sport' },
             { name: 'Языки', value: 'lang' },
+            { name: 'Политика', value: 'plt'},
+            { name: 'Международные отношения', value: 'int'},
+            { name: 'Бизнес', value: 'biz'},
+            { name: 'Экономика', value: 'econ'}
         ]
     }
 ];

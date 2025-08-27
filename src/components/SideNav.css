@@ -4,14 +4,14 @@
     position: relative;
     height: 90vh;
     width: 13vw;
-    background: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
     border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 8px 32px rgba(139, 69, 202, 0.15);
     min-width: 290px;
     margin-top: 2vh;
     margin-left: 2.5vw;
     margin-right: 30px;
-    border: 1px solid rgba(29, 185, 84, 0.1);
+    border: 1px solid rgba(139, 69, 202, 0.2);
     backdrop-filter: blur(10px);
 }
 
@@ -27,7 +27,7 @@
     justify-content: center;
     align-items: center;
     padding-bottom: var(--spacing-md);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(139, 69, 202, 0.2);
     margin-bottom: var(--spacing-md);
 }
 
@@ -36,7 +36,7 @@
     font-weight: 900;
     font-style: normal;
     font-size: 2em;
-    background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
+    background: linear-gradient(135deg, #8b45ca 0%, #9b59b6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -48,7 +48,7 @@
 
 .sidenav-logo:hover {
     transform: scale(1.05);
-    filter: drop-shadow(0 0 10px rgba(29, 185, 84, 0.5));
+    filter: drop-shadow(0 0 10px rgba(139, 69, 202, 0.5));
 }
 
 .sidenav-list {
@@ -73,9 +73,9 @@
     align-items: center;
     padding: 12px 16px;
     text-decoration: none;
-    color: #b3b3b3;
+    color: black;
     font-weight: 500;
-    border-radius: 8px;
+    border-radius: 80px !important;
     transition: all var(--transition-speed-normal) var(--transition-ease);
     width: 100%;
     box-sizing: border-box;
@@ -84,17 +84,18 @@
 }
 
 .sidenav-link:hover {
-    background: linear-gradient(135deg, rgba(29, 185, 84, 0.1) 0%, rgba(30, 215, 96, 0.1) 100%);
-    color: #ffffff;
-    transform: translateX(4px);
-    box-shadow: 0 4px 16px rgba(29, 185, 84, 0.2);
+    background: linear-gradient(135deg, rgba(139, 69, 202, 0.1) 0%, rgba(155, 89, 182, 0.1) 100%);
+    color: black;
+    border-radius: 80px !important;
+    box-shadow: 0 4px 16px rgba(139, 69, 202, 0.2);
 }
 
 .sidenav-link.active {
-    background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
+    background: linear-gradient(135deg, #8b45ca 0%, #9b59b6 100%);
     color: #ffffff;
+    border-radius: 80px !important;
     font-weight: 700;
-    box-shadow: 0 6px 20px rgba(29, 185, 84, 0.4);
+    box-shadow: 0 6px 20px rgba(139, 69, 202, 0.4);
 }
 
 .sidenav-link.logout-button {
@@ -113,33 +114,10 @@
     box-shadow: 0 6px 20px rgba(226, 33, 52, 0.4);
 }
 
-/* Стили для обычного чекбокса (если не используется Pretty Checkbox) */
-.filter-checkbox-label {
-    display: flex;
-    align-items: center;
-    font-size: 1em;
-    color: #b3b3b3;
-    cursor: pointer;
-    padding: 8px 16px;
-    border-radius: 6px;
-    transition: all var(--transition-speed-normal) var(--transition-ease);
-}
-
-.filter-checkbox-label input[type="checkbox"] {
-    margin-right: var(--spacing-sm);
-    accent-color: #1db954;
-    width: 16px;
-    height: 16px;
-}
-
-.filter-checkbox-label:hover {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.05);
-}
 
 /* Разделитель между группами ссылок */
 .sidenav-separator {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(139, 69, 202, 0.2);
     margin: var(--spacing-md) 0;
 }
 
@@ -147,18 +125,18 @@
 
 .accordion-item {
     border: 0 !important;
-    background: linear-gradient(135deg, rgba(18, 18, 18, 0.8) 0%, rgba(26, 26, 26, 0.8) 100%);
-    border-radius: 12px !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 249, 250, 0.8) 100%);
+    border-radius: 80px !important;
     margin-bottom: 12px;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(29, 185, 84, 0.1) !important;
+    
 }
 
 .accordion-button {
-    background: rgba(255, 255, 255, 0.05) !important;
-    color: #b3b3b3 !important;
+    background: rgba(139, 69, 202, 0.05) !important;
+    color: black !important;
     padding: 16px 20px !important;
-    border-radius: 12px !important;
+    border-radius: 80px !important;
     transition: all 0.15s ease-in-out;
     font-weight: 500;
     border: none !important;
@@ -166,25 +144,25 @@
 
 .accordion-button:not(.collapsed) {
     color: #ffffff !important;
-    background: linear-gradient(135deg, #1db954 0%, #1ed760 100%) !important;
-    box-shadow: 0 4px 16px rgba(29, 185, 84, 0.3);
+    background: linear-gradient(135deg, #8b45ca 0%, #9b59b6 100%) !important;
+    box-shadow: 0 4px 16px rgba(139, 69, 202, 0.3);
 }
 
 .accordion-button:focus {
-    box-shadow: 0 0 0 2px rgba(29, 185, 84, 0.2) !important;
+    box-shadow: 0 0 0 2px rgba(139, 69, 202, 0.2) !important;
     border-color: transparent !important;
 }
 
 .accordion-body {
-    background: rgba(0, 0, 0, 0.3) !important;
+    background: rgba(255, 255, 255, 0.3) !important;
     padding: 16px 20px !important;
     border-radius: 0 0 12px 12px !important;
-    color: #b3b3b3;
+    color: black;
 }
 
 .accordion-body ul, li {
     list-style: none;
-    color: #b3b3b3;
+    color: black;
 }
 
 .accordion-collapse {

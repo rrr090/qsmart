@@ -201,6 +201,10 @@ function OpportunityForm() {
                         <option value="art">Искусство</option>
                         <option value="sport">Спорт</option>
                         <option value="lang">Языки</option>
+                        <option value="pls">Политикал сайнс</option>
+                        <option value="int">Международные отношения</option>
+                        <option value="biz">Business</option>
+                        <option value="econ">Economics</option>
                     </select>
                 </div>
 

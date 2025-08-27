@@ -31,8 +31,6 @@ const formatDeadline = (timestamp) => {
     }
 };
 
-// Основной компонент карточки возможности
-
 // Объект для сопоставления коротких названий тегов с полными русскими эквивалентами
 const TAG_DISPLAY_NAMES = {
     'Олимпиада': 'Олимпиада',
@@ -54,7 +52,6 @@ const TAG_DISPLAY_NAMES = {
     // Добавьте сюда другие соответствия, если они появятся
 };
 
-
 // Основной компонент карточки возможности
 export default function OpportunityCard({ opportunity }) {
     const [expanded, setExpanded] = useState(false); // Состояние для управления видимостью полного описания
@@ -65,7 +62,6 @@ export default function OpportunityCard({ opportunity }) {
     };
 
     // Функция для рендеринга тегов (категории или типа)
-    // Теперь принимает массив строк тегов
     const renderTags = (tagsArray) => {
         if (!tagsArray || tagsArray.length === 0) return null;
         
@@ -103,7 +99,6 @@ export default function OpportunityCard({ opportunity }) {
                     <p className="card-organizer">Организатор: {opportunity.organizer || "Не указан"}</p>
                 </div>
             </div>
-
 
             <div className="card-content">
                 <p className="card-description">

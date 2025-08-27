@@ -14,19 +14,19 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: var(--main-black);
+  background: linear-gradient(to bottom, #a855f7 0%, #7c3aed 25%, #ffffff 100%);
 }
 
 .App {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: var(--main-dark-gray);
+
 }
 
 body {
-  background-color: var(--main-dark-gray);
-  color: var(--main-text-white);
+  background: linear-gradient(to bottom, #a855f7 0%, #7c3aed 25%, #ffffff 100%);  
+  color: #1e293b;
   font-family: 'Circular', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -35,26 +35,25 @@ body {
 
 a {
   text-decoration: none;
-  color: var(--main-text-white);
+  color: #1e293b;
   transition: color 0.2s ease;
 }
 
 a:hover {
-  color: var(--main-green);
+  color: #7c3aed;
 }
 
 /* --- 3. Стили хедера --- */
 .App-header {
-  background: linear-gradient(135deg, var(--main-black) 0%, var(--main-medium-gray) 100%);
   height: 64px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  color: var(--main-text-white);
+  color: #1e293b;
   padding: 0 24px;
-  border-bottom: 1px solid var(--main-border);
+  border-bottom: 1px solid #e2e8f0;
   flex-shrink: 0;
   box-sizing: border-box;
   transition: all 0.3s ease;
@@ -63,22 +62,22 @@ a:hover {
 
 /* Стили для хедера на лендинговой странице (прозрачный) */
 .App-header.landing-header {
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(255, 255, 255, 0.9);
     border-bottom: none;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 10;
-    color: var(--main-white);
+    color: #1e293b;
     backdrop-filter: blur(20px);
 }
 
 .App-header.landing-header .site-logo {
-    color: var(--main-green);
+    color: #7c3aed;
 }
 .App-header.landing-header .mobile-menu-toggle {
-    color: var(--main-green);
+    color: #7c3aed;
 }
 
 .header-content {
@@ -97,23 +96,23 @@ a:hover {
   transition: all 0.2s ease;
   cursor: pointer;
   text-decoration: none;
-  color: var(--main-green);
+  color: #7c3aed;
   font-size: 20px;
 }
 
 .site-logo:hover {
-  color: var(--main-green-hover);
+  color: #8b5cf6;
   transform: scale(1.02);
-  filter: drop-shadow(0 0 8px rgba(29, 185, 84, 0.3));
+  filter: drop-shadow(0 0 8px rgba(124, 58, 237, 0.3));
 }
 
 /* --- 4. КОНТЕЙНЕР ДЛЯ САЙДБАРА И ОСНОВНОГО КОНТЕНТА --- */
 .flexcontainerMain {
   display: flex;
   justify-content: space-between;
-  background-color: var(--main-dark-gray);
+  /*no background suka */
   gap: 8px;
-  padding: 8px;
+
 }
 
 /* Отступ сверху для flexcontainerMain, когда хедер отсутствует (для внутренних страниц) */
@@ -124,7 +123,6 @@ a:hover {
 /* --- 5. Main content Styles (App-main) --- */
 .App-main {
   flex-grow: 1;
-  background: linear-gradient(180deg, var(--main-medium-gray) 0%, var(--main-dark-gray) 300px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -132,7 +130,7 @@ a:hover {
   box-sizing: border-box;
   overflow-y: auto;
   border-radius: 8px;
-  padding: 24px;
+
 }
 
 /* Стили для App-main, когда SideNav присутствует */
@@ -143,15 +141,14 @@ a:hover {
     height: calc(100vh - 80px);
     margin-left: 0;
     overflow-y: auto;
-    background: linear-gradient(180deg, rgba(40, 40, 40, 0.8) 0%, var(--main-dark-gray) 300px);
     box-sizing: border-box;
     border-radius: 8px;
 }
 
 /* --- 6. Футер --- */
 .App-footer {
-  border-top: 1px solid var(--main-border);
-  color: var(--main-text-light);
+  border-top: 1px solid #e2e8f0;
+  color: #64748b;
   height: 72px;
   padding: 0 24px;
   flex-shrink: 0;
@@ -159,20 +156,20 @@ a:hover {
   justify-content: space-between;
   align-items: center;
   font-size: 12px;
-  background-color: var(--main-black);
+  background-color: #ffffff;
   box-sizing: border-box;
   font-weight: 400;
 }
 
 .App-footer a {
-    color: var(--main-text-light);
+    color: #64748b;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.2s ease;
 }
 
 .App-footer a:hover {
-    color: var(--main-green);
+    color: #7c3aed;
 }
 
 .App-footer .footer-center {
@@ -196,22 +193,22 @@ a:hover {
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: var(--main-text-white);
+  color: #1e293b;
   padding: 8px;
   border-radius: 50%;
   transition: all 0.2s ease;
 }
 
 .mobile-menu-toggle:hover {
-  background-color: var(--main-light-gray);
-  color: var(--main-green);
+  background-color: #f1f5f9;
+  color: #7c3aed;
 }
 
 .mobile-nav {
   display: none;
   width: 100%;
-  background: linear-gradient(135deg, var(--main-black) 0%, var(--main-medium-gray) 100%);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.15);
   overflow: hidden;
   max-height: 0;
   opacity: 0;
@@ -239,22 +236,22 @@ a:hover {
 .mobile-nav li {
   padding: 12px 20px;
   border-radius: 24px;
-  background-color: var(--main-card-bg);
+  background-color: #ffffff;
   width: 80%;
   text-align: center;
   transition: all 0.2s ease;
-  border: 1px solid var(--main-border);
+  border: 1px solid #e2e8f0;
 }
 
 .mobile-nav li:hover {
-  background-color: var(--main-light-gray);
-  border-color: var(--main-green);
+  background-color: #f8fafc;
+  border-color: #7c3aed;
 }
 
 .mobile-nav li button {
     background: none;
     border: none;
-    color: var(--main-text-white);
+    color: #1e293b;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
@@ -263,17 +260,17 @@ a:hover {
 }
 
 .mobile-nav li button:hover {
-    color: var(--main-green);
+    color: #7c3aed;
 }
 
 .mobile-nav .nav-link {
-  color: var(--main-text-white);
+  color: #1e293b;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
 .mobile-nav .nav-link.active {
-  color: var(--main-green);
+  color: #7c3aed;
 }
 
 /* --- 8. Секция фильтров (если есть) --- */
@@ -287,10 +284,10 @@ a:hover {
 
 .filters button {
   padding: 8px 16px;
-  border: 1px solid var(--main-border);
+  border: 1px solid #e2e8f0;
   border-radius: 20px;
-  background-color: var(--main-card-bg);
-  color: var(--main-text-white);
+  background-color: #ffffff;
+  color: #1e293b;
   cursor: pointer;
   font-size: 12px;
   font-weight: 500;
@@ -300,15 +297,15 @@ a:hover {
 }
 
 .filters button:hover {
-  background-color: var(--main-light-gray);
-  border-color: var(--main-green);
-  color: var(--main-green);
+  background-color: #f8fafc;
+  border-color: #7c3aed;
+  color: #7c3aed;
 }
 
 .filters button.active {
-  background-color: var(--main-green);
-  color: var(--main-black);
-  border-color: var(--main-green);
+  background-color: #7c3aed;
+  color: #ffffff;
+  border-color: #7c3aed;
 }
 
 /* --- 9. Медиа-запросы для адаптивности --- */
@@ -393,27 +390,27 @@ a:hover {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--main-dark-gray);
+
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--main-light-gray);
+  background: #cbd5e1;
   border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--main-border);
+  background: #94a3b8;
 }
 
 /* Focus states */
 button:focus,
 a:focus {
-  outline: 2px solid var(--main-green);
+  outline: 2px solid #7c3aed;
   outline-offset: 2px;
 }
 
 /* Selection styling */
 ::selection {
-  background-color: var(--main-green);
-  color: var(--main-black);
+  background-color: #7c3aed;
+  color: #ffffff;
 }
