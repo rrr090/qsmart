@@ -1,23 +1,65 @@
 /* src/components/OpportunityForm.css */
 
 .opportunity-form {
-    background-color: #ffffff;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    max-width: 800px; /* Ограничиваем ширину формы */
-    margin: 0 auto; /* Центрируем форму */
+    background: linear-gradient(135deg, #ffffff 0%, #faf9ff 100%);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 
+        0 10px 40px rgba(139, 92, 246, 0.08),
+        0 4px 20px rgba(139, 92, 246, 0.04),
+        0 1px 3px rgba(139, 92, 246, 0.02);
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid rgba(139, 92, 246, 0.08);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.opportunity-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #8b5cf6, #a855f7, #c084fc, #e879f9);
+    background-size: 300% 100%;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }
 
 .opportunity-form .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 28px;
+    position: relative;
 }
 
 .opportunity-form label {
     display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #343a40;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #6b46c1;
+    font-size: 0.95em;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    position: relative;
+    padding-left: 8px;
+}
+
+.opportunity-form label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 16px;
+    background: linear-gradient(135deg, #8b5cf6, #a855f7);
+    border-radius: 2px;
 }
 
 .opportunity-form input[type="text"],
@@ -26,53 +68,219 @@
 .opportunity-form textarea,
 .opportunity-form select {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
+    padding: 16px 20px;
+    border: 2px solid rgba(139, 92, 246, 0.15);
+    border-radius: 12px;
     font-size: 1em;
-    box-sizing: border-box; /* Важно для корректной ширины */
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    color: #4c1d95;
+    font-weight: 500;
+    position: relative;
+}
+
+.opportunity-form input[type="text"]:hover,
+.opportunity-form input[type="url"]:hover,
+.opportunity-form input[type="datetime-local"]:hover,
+.opportunity-form textarea:hover,
+.opportunity-form select:hover {
+    border-color: rgba(139, 92, 246, 0.3);
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.08);
 }
 
 .opportunity-form input:focus,
 .opportunity-form textarea:focus,
 .opportunity-form select:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), .25);
+    border-color: #8b5cf6;
+    box-shadow: 
+        0 0 0 4px rgba(139, 92, 246, 0.15),
+        0 8px 32px rgba(139, 92, 246, 0.12);
     outline: none;
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-2px);
+}
+
+.opportunity-form input:focus + .input-highlight,
+.opportunity-form textarea:focus + .input-highlight,
+.opportunity-form select:focus + .input-highlight {
+    transform: scaleX(1);
 }
 
 .opportunity-form textarea {
-    resize: vertical; /* Разрешить изменение размера по вертикали */
-    min-height: 100px;
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+    line-height: 1.6;
 }
 
 .form-error-message {
-    color: #dc3545;
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
-    padding: 10px 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
+    color: #be185d;
+    background: linear-gradient(135deg, rgba(244, 63, 94, 0.08) 0%, rgba(236, 72, 153, 0.04) 100%);
+    border: 2px solid rgba(236, 72, 153, 0.2);
+    padding: 16px 20px;
+    border-radius: 12px;
+    margin-bottom: 24px;
     text-align: center;
+    font-weight: 600;
+    backdrop-filter: blur(5px);
+    position: relative;
+    box-shadow: 0 4px 20px rgba(236, 72, 153, 0.1);
+}
+
+.form-error-message::before {
+    content: '⚠';
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, #ec4899, #f43f5e);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.form-error-message {
+    padding-left: 60px;
+    text-align: left;
 }
 
 .opportunity-form .btn-primary {
-    width: auto; /* Кнопка не на всю ширину */
-    padding: 12px 30px;
-    font-size: 1.1em;
+    width: auto;
+    padding: 16px 40px;
+    font-size: 1.05em;
     cursor: pointer;
+    background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+    margin-top: 8px;
+}
+
+.opportunity-form .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+}
+
+.opportunity-form .btn-primary:hover {
+    background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(139, 92, 246, 0.4);
+}
+
+.opportunity-form .btn-primary:hover::before {
+    left: 100%;
+}
+
+.opportunity-form .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.3);
 }
 
 .opportunity-form .btn-primary:disabled {
-    background-color: #cccccc;
+    background: linear-gradient(135deg, #d1d5db, #9ca3af);
     cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.6;
 }
 
-/* Адаптивность для формы на маленьких экранах */
+.opportunity-form .btn-primary:disabled::before {
+    display: none;
+}
+
+/* Floating label effect for enhanced UX */
+.form-group {
+    position: relative;
+}
+
+.floating-label {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    font-size: 1em;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0 8px;
+    border-radius: 4px;
+}
+
+.form-group input:focus + .floating-label,
+.form-group input:not(:placeholder-shown) + .floating-label,
+.form-group textarea:focus + .floating-label,
+.form-group textarea:not(:placeholder-shown) + .floating-label {
+    top: 0;
+    font-size: 0.85em;
+    color: #8b5cf6;
+    font-weight: 600;
+}
+
+/* Success state for completed fields */
+.form-group input:valid:not(:focus),
+.form-group textarea:valid:not(:focus) {
+    border-color: rgba(34, 197, 94, 0.3);
+    background: rgba(240, 253, 244, 0.5);
+}
+
+.form-group input:valid:not(:focus)::after {
+    content: '✓';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #22c55e;
+    font-weight: bold;
+}
+
+/* Responsive design */
 @media (max-width: 768px) {
     .opportunity-form {
-        padding: 15px;
-        margin: 0; /* Убираем авто-отступы на мобильных */
+        padding: 24px 20px;
+        margin: 0 16px;
+        border-radius: 16px;
+    }
+    
+    .opportunity-form .form-group {
+        margin-bottom: 24px;
+    }
+    
+    .opportunity-form input[type="text"],
+    .opportunity-form input[type="url"],
+    .opportunity-form input[type="datetime-local"],
+    .opportunity-form textarea,
+    .opportunity-form select {
+        padding: 14px 16px;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    .opportunity-form .btn-primary {
+        width: 100%;
+        padding: 14px 20px;
+        margin-top: 16px;
     }
 }

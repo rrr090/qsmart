@@ -99,7 +99,7 @@
 }
 
 .sidenav-link.logout-button {
-    background: linear-gradient(135deg, #e22134 0%, #ff073a 100%);
+    background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
     color: #ffffff;
     border: none;
     cursor: pointer;
@@ -117,8 +117,7 @@
 
 /* Разделитель между группами ссылок */
 .sidenav-separator {
-    border-top: 1px solid rgba(139, 69, 202, 0.2);
-    margin: var(--spacing-md) 0;
+
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');

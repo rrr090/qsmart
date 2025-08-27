@@ -1,57 +1,119 @@
 /* src/pages/admin/OpportunityListAdmin.css */
 
 .admin-actions-header {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     display: flex;
-    justify-content: flex-end; /* Выравнивает кнопку вправо */
+    justify-content: flex-end;
+    padding: 0 4px;
 }
 
 .opportunities-table-container {
-    overflow-x: auto; /* Позволяет прокручивать таблицу по горизонтали на маленьких экранах */
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+    background: linear-gradient(135deg, #ffffff 0%, #faf9ff 100%);
+    border-radius: 16px;
+    box-shadow: 
+        0 4px 20px rgba(139, 92, 246, 0.08),
+        0 1px 3px rgba(139, 92, 246, 0.05);
+    border: 1px solid rgba(139, 92, 246, 0.06);
+    backdrop-filter: blur(10px);
 }
 
 .opportunities-table {
     width: 100%;
-    border-collapse: collapse; /* Убирает двойные границы между ячейками */
+    border-collapse: collapse;
     font-size: 0.95em;
-    table-layout: fixed; /* Помогает избежать "съезжания" столбцов */
+    table-layout: fixed;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .opportunities-table th,
 .opportunities-table td {
-    padding: 12px 15px;
+    padding: 16px 20px;
     text-align: left;
-    border-bottom: 1px solid #dee2e6; /* Легкая граница между строками */
+    border-bottom: 1px solid rgba(139, 92, 246, 0.08);
+    transition: all 0.2s ease;
 }
 
 .opportunities-table th {
-    background-color: #e9ecef; /* Светлый фон для заголовков */
-    font-weight: bold;
-    color: #495057;
+    background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+    font-weight: 600;
+    color: #ffffff;
     text-transform: uppercase;
-    font-size: 0.85em;
+    font-size: 0.82em;
+    letter-spacing: 0.5px;
+    position: relative;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.opportunities-table th::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #c084fc, #e879f9, #c084fc);
+}
+
+.opportunities-table tbody tr {
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.opportunities-table tbody tr:nth-child(even) {
+    background-color: rgba(248, 245, 255, 0.4);
 }
 
 .opportunities-table tbody tr:hover {
-    background-color: #f8f9fa; /* Легкий фон при наведении на строку */
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(168, 85, 247, 0.03) 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1);
 }
 
 .opportunities-table tbody tr:last-child td {
-    border-bottom: none; /* Убираем границу у последней строки */
+    border-bottom: none;
+}
+
+.opportunities-table td {
+    color: #4c1d95;
+    font-weight: 500;
 }
 
 .actions-cell {
-    white-space: nowrap; /* Предотвращает перенос кнопок на следующую строку */
-    width: 1%; /* Занимает минимально необходимую ширину */
+    white-space: nowrap;
+    width: 1%;
+    text-align: center;
 }
 
 .btn-sm {
-    padding: 6px 12px; /* Уменьшенные отступы для кнопок в таблице */
-    font-size: 0.85em;
-    margin-right: 8px; /* Отступ между кнопками */
+    padding: 8px 16px;
+    font-size: 0.84em;
+    margin-right: 8px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-sm::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-sm:hover::before {
+    left: 100%;
 }
 
 .btn-sm:last-child {
@@ -59,28 +121,46 @@
 }
 
 .btn-info {
-    background-color: #17a2b8;
+    background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
     color: white;
-    border: 1px solid #17a2b8;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
 }
 
 .btn-info:hover {
-    background-color: #138496;
-    border-color: #117a8b;
+    background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+}
+
+.btn-info:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
 }
 
 .btn-danger {
-    background-color: #dc3545;
+    background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
     color: white;
-    border: 1px solid #dc3545;
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
 }
 
 .btn-danger:hover {
-    background-color: #c82333;
-    border-color: #bd2130;
+    background: linear-gradient(135deg, #db2777 0%, #e11d48 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+}
+
+.btn-danger:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);
 }
 
 .error-message {
-    color: #dc3545;
-    font-weight: bold;
+    color: #be185d;
+    font-weight: 600;
+    background: linear-gradient(135deg, rgba(244, 63, 94, 0.1) 0%, rgba(236, 72, 153, 0.05) 100%);
+    padding: 12px 16px;
+    border-radius: 8px;
+    border-left: 4px solid #ec4899;
+    margin: 16px 0;
+    backdrop-filter: blur(5px);
 }
